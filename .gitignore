@@ -1,0 +1,10 @@
+old/
+guideline/
+vendor/
+database/
+zips/
+upgrade/
+storage/tmp/
+guideline/
+/storage/app/GeoLite2-City.mmdb
+.env
