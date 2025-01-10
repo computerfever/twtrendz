@@ -37,6 +37,56 @@
 </div>
 
 <div class="sub_section">
+    <h3 class="text-semibold">
+        {{ trans('messages.contact_information') }}
+        <span class="subhead">{!! trans('messages.default_from_your_contact_information', ['link' => action('AccountController@contact')]) !!}</span>
+    </h3>
+    <div class="row">
+        <div class="col-md-6">
+            @include('helpers.form_control', ['type' => 'text', 'name' => 'contact[company]', 'label' => trans('messages.company_organization'), 'value' => @$list->contact->company, 'help_class' => 'list', 'rules' => Acelle\Model\MailList::$rules])
+        </div>
+
+        <div class="col-md-6">
+            @include('helpers.form_control', ['type' => 'text', 'name' => 'contact[phone]', 'label' => trans('messages.phone'), 'value' => @$list->contact->phone, 'help_class' => 'list', 'rules' => Acelle\Model\MailList::$rules])
+        </div>
+
+        <div class="col-md-6">
+            @include('helpers.form_control', ['type' => 'text', 'name' => 'contact[email]', 'label' => trans('messages.email'), 'value' => @$list->contact->email, 'help_class' => 'list', 'rules' => Acelle\Model\MailList::$rules])
+        </div>
+
+        <div class="col-md-6">
+            @include('helpers.form_control', ['type' => 'text', 'name' => 'contact[zip]', 'label' => trans('messages.zip_postal_code'), 'value' => @$list->contact->zip, 'help_class' => 'list', 'rules' => Acelle\Model\MailList::$rules])
+        </div>
+
+        <div class="col-md-6">
+            @include('helpers.form_control', ['type' => 'text', 'name' => 'contact[state]', 'label' => trans('messages.state_province_region'), 'value' => @$list->contact->state, 'rules' => Acelle\Model\MailList::$rules])
+        </div>
+        <div class="col-md-6">
+            @include('helpers.form_control', ['type' => 'text', 'name' => 'contact[city]', 'label' => trans('messages.city'), 'value' => @$list->contact->city, 'help_class' => 'list', 'rules' => Acelle\Model\MailList::$rules])
+        </div>
+
+        <div class="col-md-6">
+            @include('helpers.form_control', ['type' => 'text', 'name' => 'contact[address_1]', 'label' => trans('messages.address_1'), 'value' => @$list->contact->address_1, 'help_class' => 'list', 'rules' => Acelle\Model\MailList::$rules])
+        </div>
+        <div class="col-md-6">
+            @include('helpers.form_control', ['type' => 'text', 'name' => 'contact[address_2]', 'label' => trans('messages.address_2'), 'value' => @$list->contact->address_2, 'help_class' => 'list', 'rules' => Acelle\Model\MailList::$rules])
+        </div>
+
+        @if (config('custom.japan'))
+            <input type="hidden" name="contact[country_id]" value="{{ Acelle\Model\Country::getJapan()->id }}" />
+        @else
+            <div class="col-md-6">
+                @include('helpers.form_control', ['type' => 'select', 'name' => 'contact[country_id]', 'label' => trans('messages.country'), 'value' => @$list->contact->country_id, 'options' => Acelle\Model\Country::getSelectOptions(), 'include_blank' => trans('messages.choose'), 'rules' => Acelle\Model\MailList::$rules])
+            </div>
+        @endif
+
+        <div class="col-md-6">
+            @include('helpers.form_control', ['type' => 'text', 'name' => 'contact[url]', 'label' => trans('messages.url'), 'label' => trans('messages.home_page'), 'value' => @$list->contact->url, 'help_class' => 'list', 'rules' => Acelle\Model\MailList::$rules])
+        </div>
+    </div>
+</div>
+
+<div class="sub_section">
     <h2 class="text-semibold">{{ trans('messages.settings') }}</h2>
     <h3 class="text-semibold">{{ trans('messages.subscription') }}</h3>
     <div class="row">

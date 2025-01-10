@@ -234,6 +234,7 @@ class Template extends Model
             ['name' => 'PHONE', 'required' => false],
             ['name' => 'email', 'required' => false],
             ['name' => 'URL', 'required' => false],
+            ['name' => 'profile_photo', 'required' => false],
         ]);
 
         return $tags;

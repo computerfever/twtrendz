@@ -68,8 +68,10 @@ class MailListController extends Controller
         $user = $request->user();
         $customer = $user->customer;
         $list = $customer->newMailList();
+        $list->contact = new \Acelle\Model\Contact();
 
         if ($customer->contact) {
+            $list->contact->fill($customer->contact->toArray());
             $list->send_to = $customer->contact->email;
         } else {
             $list->send_to = $user->email;
@@ -88,6 +90,9 @@ class MailListController extends Controller
         // Get old post values
         if (null !== $request->old()) {
             $list->fill($request->old());
+        }
+        if (isset($request->old()['contact'])) {
+            $list->contact->fill($request->old()['contact']);
         }
 
         // Sending servers
@@ -150,6 +155,13 @@ class MailListController extends Controller
             $list->customer_id = $customer->id;
             $list->save();
 
+            // Save contact
+            $contact = \Acelle\Model\Contact::create($request->all()['contact']);
+            $list->fill($request->all());
+            $list->customer_id = $customer->id;
+            $list->contact_id = $contact->id;
+            $list->save();
+
             // For sending servers
             if (isset($request->sending_servers)) {
                 $list->updateSendingServers($request->sending_servers);
@@ -200,6 +212,12 @@ class MailListController extends Controller
         // Get old post values
         if (null !== $request->old()) {
             $list->fill($request->old());
+        }  
+
+        if(!empty($list->contact_id)){
+            if (isset($request->old()['contact'])) {
+                $list->contact->fill($request->old()['contact']);
+            }
         }
 
         // Sending servers
@@ -261,6 +279,19 @@ class MailListController extends Controller
 
             $list->fill($request->all());
             $list->save();
+
+            // Save contact
+            if(empty($list->contact_id)){
+                $contact = \Acelle\Model\Contact::create($request->all()['contact']);
+                $list->fill($request->all());
+                $list->contact_id = $contact->id;
+                $list->save();
+            }else{
+                $list->contact->fill($request->all()['contact']);
+                $list->contact->save();
+                $list->fill($request->all());
+                $list->save();
+            }
 
             // For sending servers
             if (isset($request->sending_servers)) {

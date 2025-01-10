@@ -89,6 +89,17 @@ class MailList extends Model
         'name' => 'required',
         'from_email' => 'required|email',
         'from_name' => 'required',
+
+        'contact.company' => 'required',
+        'contact.address_1' => 'required',
+        'contact.country_id' => 'required',
+        'contact.state' => 'required',
+        'contact.city' => 'required',
+        'contact.zip' => 'required',
+        'contact.phone' => 'required',
+        'contact.email' => 'required|email',
+        'contact.url' => 'nullable|regex:/^https{0,1}:\/\//',
+
         'email_subscribe' => 'nullable|regex:"^[\W]*([\w+\-.%]+@[\w\-.]+\.[A-Za-z]{2,4}[\W]*,{1}[\W]*)*([\w+\-.%]+@[\w\-.]+\.[A-Za-z]{2,4})[\W]*$"',
         'email_unsubscribe' => 'nullable|regex:"^[\W]*([\w+\-.%]+@[\w\-.]+\.[A-Za-z]{2,4}[\W]*,{1}[\W]*)*([\w+\-.%]+@[\w\-.]+\.[A-Za-z]{2,4})[\W]*$"',
         'email_daily' => 'nullable|regex:"^[\W]*([\w+\-.%]+@[\w\-.]+\.[A-Za-z]{2,4}[\W]*,{1}[\W]*)*([\w+\-.%]+@[\w\-.]+\.[A-Za-z]{2,4})[\W]*$"',
@@ -135,6 +146,10 @@ class MailList extends Model
         return $this->pages()->where('layout_id', $layout->id)->first();
     }
 
+    public function contact(){
+        return $this->belongsTo('Acelle\Model\Contact');
+    }
+
     public function subscribers()
     {
         return $this->hasMany('Acelle\Model\Subscriber');
@@ -167,6 +182,12 @@ class MailList extends Model
 
         // detele
         static::deleted(function ($item) {
+
+            //  Delete contact when list deleted
+            if (!is_null($item->contact)) {
+                $item->contact->delete();
+            }
+
             // Delete export jobs
             $item->exportJobs()->delete();
         });
@@ -708,6 +729,17 @@ class MailList extends Model
         $copy->save();
 
         // @todo: trigger MailListSubscription event here?
+        
+        // Contact
+        if ($this->contact) {
+            $new_contact = $this->contact->replicate();
+            $new_contact->uid = uniqid();
+            $new_contact->save();
+
+            // update contact
+            $copy->contact_id = $new_contact->id;
+            $copy->save();
+        }
 
         // Remove default fields
         $copy->fields()->delete();
@@ -1841,6 +1873,16 @@ class MailList extends Model
         }
 
         $copy->save();
+
+        // Contact
+        if ($this->contact) {
+            $new_contact = $this->contact->replicate();
+            $new_contact->save();
+
+            // update contact
+            $copy->contact_id = $new_contact->id;
+            $copy->save();
+        }
 
         // Remove default fields
         $copy->fields()->delete();

@@ -90,19 +90,21 @@ class TransformTag implements StageInterface
             // Only email is "reserved", overwrite previous $sample
             $tags['SUBSCRIBER_EMAIL'] = is_null($this->subscriber) ? 'email@sample.com' : $this->subscriber->email;
         } else {
-            $tags['LIST_UID'] = $this->subscriber->mailList->uid;
-            $tags['LIST_NAME'] = $this->subscriber->mailList->name;
-            $tags['LIST_FROM_NAME'] = $this->subscriber->mailList->from_name;
-            $tags['LIST_FROM_EMAIL'] = $this->subscriber->mailList->from_email;
-            $tags['CONSULTANT_ID'] = $this->subscriber->mailList->contact->consultant_id;
-            $tags['CONSULTANT_MSG'] = $this->subscriber->mailList->contact->message;
-            $tags['first_name'] = $this->subscriber->mailList->contact->first_name;
-            $tags['last_name'] = $this->subscriber->mailList->contact->last_name;
-            $tags['PHONE'] = $this->subscriber->mailList->contact->phone;
-            $tags['email'] = $this->subscriber->mailList->contact->email;
-            $tags['URL'] = $this->subscriber->mailList->contact->url;
-            $tags['image'] = $this->subscriber->mailList->contact->image;
-            $tags['profile_photo'] = $this->subscriber->mailList->contact->profile_photo;
+            $tags['LIST_UID'] = @$this->subscriber->mailList->uid;
+            $tags['LIST_NAME'] = @$this->subscriber->mailList->name;
+            $tags['LIST_FROM_NAME'] = @$this->subscriber->mailList->from_name;
+            $tags['LIST_FROM_EMAIL'] = @$this->subscriber->mailList->from_email;
+            // $tags['CONSULTANT_ID'] = print_r($this->subscriber->mailList->customer->contact);
+
+            $tags['CONSULTANT_ID'] = @$this->subscriber->mailList->customer->contact->consultant_id;
+            $tags['CONSULTANT_MSG'] = @$this->subscriber->mailList->customer->contact->message;
+            $tags['first_name'] = @$this->subscriber->mailList->customer->contact->first_name;
+            $tags['last_name'] = @$this->subscriber->mailList->customer->contact->last_name;
+            $tags['PHONE'] = @$this->subscriber->mailList->customer->contact->phone;
+            $tags['email'] = @$this->subscriber->mailList->customer->contact->email;
+            $tags['URL'] = @$this->subscriber->mailList->customer->contact->url;
+            $tags['image'] = @$this->subscriber->mailList->customer->contact->image;
+            $tags['profile_photo'] = @$this->subscriber->mailList->customer->user->getProfileImageUrl();
 
             $updateProfileUrl = $this->subscriber->generateUpdateProfileUrl();
 
