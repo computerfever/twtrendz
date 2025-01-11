@@ -27,7 +27,7 @@
 					</div>
 				</td>
 				<td>
-					<span class="no-margin kq_search"><a class="reason-link" href="{{ action('Admin\BlacklistController@reason', $blacklist->id) }}">{{ $blacklist->email }}</a></span>
+					<span class="no-margin kq_search"><a class="reason-link" href="{{ action('Admin\BlacklistController@reason', $blacklist->id) }}">{{ @$blacklist->email }}</a></span>
 					<span class="text-muted second-line-mobile">
 					<a class="reason-link" href="{{ action('Admin\BlacklistController@reason', $blacklist->id) }}">
 						{{ trans('messages.email') }}
