@@ -84,6 +84,9 @@ class CampaignController extends Controller
      */
     public function create(Request $request)
     {
+
+        $user = $request->user();
+
         $campaign = $request->user()->customer->local()->newDefaultCampaign();
 
         // authorize
@@ -91,11 +94,26 @@ class CampaignController extends Controller
             return $this->noMoreItem();
         }
 
-        $campaign->saveFromArray([
-            'type' => $request->type,
-        ]);
+        if($request->has('admin') AND $user->can("admin_access", $user)){
+            
+            $campaign->saveFromArray([
+                'type' => $request->type,
+                'admin' => $request->admin,
+            ]);
 
-        return redirect()->action('CampaignController@recipients', ['uid' => $campaign->uid]);
+            return redirect()->action('CampaignController@setup', ['uid' => $campaign->uid]);
+
+        }else{
+
+            $campaign->saveFromArray([
+                'type' => $request->type,
+            ]);
+            
+            return redirect()->action('CampaignController@recipients', ['uid' => $campaign->uid]);
+
+        }
+
+        
     }
 
     /**
@@ -237,8 +255,8 @@ class CampaignController extends Controller
             return $this->notAuthorized();
         }
 
-        $campaign->from_name = !empty($campaign->from_name) ? $campaign->from_name : $campaign->defaultMailList->from_name;
-        $campaign->from_email = !empty($campaign->from_email) ? $campaign->from_email : $campaign->defaultMailList->from_email;
+        $campaign->from_name = !empty(@$campaign->from_name) ? $campaign->from_name : @$campaign->defaultMailList->from_name;
+        $campaign->from_email = !empty(@$campaign->from_email) ? $campaign->from_email : @$campaign->defaultMailList->from_email;
 
         // Get old post values
         if ($request->old()) {

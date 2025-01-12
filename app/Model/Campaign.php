@@ -29,6 +29,7 @@ use Carbon\Carbon;
 use League\Csv\Writer;
 use Acelle\Library\StringHelper;
 use Acelle\Model\Setting;
+use Acelle\Model\MailList;
 use Validator;
 use ZipArchive;
 use KubAT\PhpSimple\HtmlDomParser;
@@ -75,7 +76,12 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
      */
     public function defaultMailList()
     {
-        return $this->belongsTo('Acelle\Model\MailList', 'default_mail_list_id');
+        if($this->admin == 1){
+            // return MailList::findByUid('67763a697e092');
+            return $this->belongsTo('Acelle\Model\MailList', 'customer_id');
+        }else{
+            return $this->belongsTo('Acelle\Model\MailList', 'default_mail_list_id');
+        }
     }
 
     /**
@@ -84,6 +90,8 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
     public function mailLists()
     {
         return $this->belongsToMany('Acelle\Model\MailList', 'campaigns_lists_segments');
+        // print_r($this->belongsToMany('Acelle\Model\MailList', 'campaigns_lists_segments'));
+        // exit();
     }
 
     /**
@@ -223,11 +231,17 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
     /**
      * Get campaign list segment.
      *
+     * 
+     * 
      * @return mixed
      */
     public function listsSegments()
-    {
-        return $this->hasMany('Acelle\Model\CampaignsListsSegment');
+    {   
+        // if($this->admin == 0){
+            return $this->hasMany('Acelle\Model\CampaignsListsSegment');
+        // }else{
+        //     return MailList::where('name', '=', 'Newsletter')->get();
+        // }
     }
 
     /**
@@ -465,7 +479,7 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
         $step = 0;
 
         // Step 1
-        if ($this->defaultMailList) {
+        if ($this->defaultMailList OR $this->admin == 1) {
             $step = 1;
         } else {
             return $step;
@@ -2146,7 +2160,12 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
     public function prepare()
     {
         // Available sending servers
-        $servers = $this->defaultMailList->getSendingServers();
+
+        if($this->admin == 1){
+            $servers = \Acelle\Model\MailList::where('customer_id', $this->customer_id)->first()->getSendingServers();
+        }else{
+            $servers = $this->defaultMailList->getSendingServers();
+        }
 
         // No sending server ready for delivery
         if (empty($servers)) {
@@ -2191,7 +2210,11 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
     {
         if (is_null($this->serversPool)) {
             // Available sending servers
-            $serversAndWeights = $this->defaultMailList->getSendingServers();
+            if($this->admin == 1){
+                $serversAndWeights = \Acelle\Model\MailList::where('customer_id', $this->customer_id)->first()->getSendingServers();
+            }else{
+                $serversAndWeights = $this->defaultMailList->getSendingServers();
+            }
             // No sending server ready for delivery
             if (empty($serversAndWeights)) {
                 throw new Exception('No sending server avaialble');
@@ -2272,14 +2295,24 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
     public function subscribers($params = [])
     {
         // Get subscriber from mailist and segment
-        $listsAndSegments = [];
-        foreach ($this->listsSegments as $lists_segment) {
-            if (!empty($lists_segment->segment_id)) {
-                $listsAndSegments[] = $lists_segment->segment;
-            } else {
-                $listsAndSegments[] = $lists_segment->mailList;
+
+        if($this->admin == 0){
+            $listsAndSegments = [];
+            foreach ($this->listsSegments as $lists_segment) {
+                if (!empty($lists_segment->segment_id)) {
+                    $listsAndSegments[] = $lists_segment->segment;
+                } else {
+                    $listsAndSegments[] = $lists_segment->mailList;
+                }
             }
         }
+
+        if($this->admin == 1){
+            $listsAndSegments = \Acelle\Model\MailList::where('name', '=', 'Newsletter')->get();
+        }
+
+        // print_r($listsAndSegments);
+        // exit();
 
         $query = Subscriber::getByListsAndSegments($this->customer->getDbConnection(), ...$listsAndSegments);
 
@@ -2326,9 +2359,15 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
      *
      * @return mixed
      */
-    public function pickSendingServer()
-    {
-        return $this->defaultMailList->pickSendingServer();
+    public function pickSendingServer(){
+
+        // print_r($this->defaultMailList->pickSendingServer());
+        // exit();
+        if($this->admin == 1){
+            return \Acelle\Model\MailList::where('customer_id', $this->customer_id)->first()->pickSendingServer();
+        }else{
+            return $this->defaultMailList->pickSendingServer();
+        }
     }
 
     public function doSendTestEmail($email)
@@ -2472,6 +2511,10 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
         // type
         if (isset($params['type'])) {
             $this->type = $params['type'];
+        }
+
+        if (isset($params['admin'])) {
+            $this->admin = $params['admin'];
         }
 
         // default mail list id

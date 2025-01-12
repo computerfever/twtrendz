@@ -1,11 +1,17 @@
 <ul class="nav nav-tabs nav-underline mb-1 campaign-steps" role="tablist">
+    
+    @if($campaign->admin != 1)
     <li class="nav-item">
         <a class="nav-link fs-6 {{ $current == 1 ? "active" : "" }} me-0" href="{{ action('CampaignController@recipients', $campaign->uid) }}">
             <span class="material-symbols-rounded">people</span> {{ trans('messages.recipients') }}
         </a>
     </li>
+    @endif
+
     <li class="nav-item {{ $campaign->step() > 0 ? "" : "disabled" }}">
+        @if($campaign->admin != 1)
         <span class="material-symbols-rounded mx-3 text-muted2">arrow_forward_ios</span>
+        @endif
         <a class="nav-link fs-6 {{ $current == 2 ? "active" : "" }} me-0" href="{{ action('CampaignController@setup', $campaign->uid) }}">
             <span class="material-symbols-rounded">settings</span> {{ trans('messages.setup') }}
         </a>
@@ -29,3 +35,4 @@
         </a>
     </li>
 </ul>
+{{-- {{$campaign->step()}} --}}
