@@ -108,6 +108,15 @@ class CustomerController extends Controller
             $role_uid = $request->role_uid
         );
 
+        //  errors
+        if (!$validator->errors()->isEmpty()) {
+            return view('admin.customers.create', [
+                'customer' => $customer,
+                'user' => $user,
+                'errors' => $validator->errors(),
+            ]);
+        }
+
         // Generate info
         $list = $customer->newMailList();
 
@@ -117,15 +126,6 @@ class CustomerController extends Controller
         $list->customer_id = $customer->id;
         $list->contact_id = $contact->id;
         $list->save();
-
-        //  errors
-        if (!$validator->errors()->isEmpty()) {
-            return view('admin.customers.create', [
-                'customer' => $customer,
-                'user' => $user,
-                'errors' => $validator->errors(),
-            ]);
-        }
 
         return redirect()->action('Admin\CustomerController@index')
             ->with('alert-success', trans('messages.customer.created'));

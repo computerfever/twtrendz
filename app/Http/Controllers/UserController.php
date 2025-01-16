@@ -160,6 +160,15 @@ class UserController extends Controller
                 $image = $request->phone
             );
 
+            //  errors
+            if (!$validator->errors()->isEmpty()) {
+                return view('users.register', [
+                    'customer' => $customer,
+                    'user' => $user,
+                    'errors' => $validator->errors(),
+                ]);
+            }
+
             // Generate info
             $list = $customer->newMailList();
 
@@ -169,15 +178,6 @@ class UserController extends Controller
             $list->customer_id = $customer->id;
             $list->contact_id = $contact->id;
             $list->save();
-
-            //  errors
-            if (!$validator->errors()->isEmpty()) {
-                return view('users.register', [
-                    'customer' => $customer,
-                    'user' => $user,
-                    'errors' => $validator->errors(),
-                ]);
-            }
 
             // user email verification
             if (true) {
