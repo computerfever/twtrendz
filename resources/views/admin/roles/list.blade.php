@@ -14,7 +14,7 @@
                     </p>
                 </td>
 
-                <td style="width:30%">
+                <td>
                     <div class="px-md-4">
                         <div class="mb-1">
                             <a class="" href="{{ action('Admin\RoleController@edit', $role->uid) }}">
@@ -25,7 +25,7 @@
                     </div>
                 </td>
 
-                <td style="width:30%">
+                <td>
                     <div class="px-md-4">
                         <div class="mb-1">
                             <span class="" href="{{ action('Admin\RoleController@edit', $role->uid) }}">

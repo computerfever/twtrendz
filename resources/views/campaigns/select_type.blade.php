@@ -54,7 +54,7 @@
 
             @can("admin_access", Auth::user())
 
-                <h3 class="mb-0 mt-5">For Customers</h3>
+                <h3 class="mb-0 mt-5">For Customers Newsletter List Subcribers</h3>
 
                 <hr>
 

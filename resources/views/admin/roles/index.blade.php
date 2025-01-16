@@ -29,7 +29,7 @@
                         <span class="title text-semibold text-muted">{{ trans('messages.sort_by') }}</span>
                         <select class="select" name="sort_order">
                             <option value="created_at">{{ trans('messages.created_at') }}</option>
-                            <option value="email_address">{{ trans('messages.role.email_address') }}</option>
+                            {{-- <option value="email_address">{{ trans('messages.role.email_address') }}</option> --}}
                         </select>
                         <input type="hidden" name="sort_direction" value="desc" />
                         <button type="button" class="btn btn-light sort-direction" data-popup="tooltip" title="{{ trans('messages.change_sort_direction') }}" role="button" class="btn btn-xs">
