@@ -160,6 +160,16 @@ class UserController extends Controller
                 $image = $request->phone
             );
 
+            // Generate info
+            $list = $customer->newMailList();
+
+            // Save contact
+            $contact = \Acelle\Model\Contact::create(['company' => '', 'phone' => '', 'email' => $request->email, 'zip' => '', '' => '', 'city' => '', 'address_1' => '', 'address_2' => NULL, 'country_id' => NULL, 'url' => '']);
+            $list->fill(['name' => 'Newsletter','from_name' => $request->name,'from_email' => $request->email]);
+            $list->customer_id = $customer->id;
+            $list->contact_id = $contact->id;
+            $list->save();
+
             //  errors
             if (!$validator->errors()->isEmpty()) {
                 return view('users.register', [
