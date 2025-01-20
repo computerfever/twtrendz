@@ -626,6 +626,9 @@ Route::group(['middleware' => ['not_installed', 'auth', 'frontend', 'subscriptio
     Route::post('campaigns/{uid}/recipients', 'CampaignController@recipients');
     Route::get('campaigns/{uid}/setup', 'CampaignController@setup');
     Route::post('campaigns/{uid}/setup', 'CampaignController@setup');
+
+    Route::post('campaigns/{uid}/updateTagsFallbackValues', 'CampaignController@updateTagsFallbackValues');
+
     Route::get('campaigns/{uid}/template', 'CampaignController@template');
     Route::post('campaigns/{uid}/template', 'CampaignController@template');
     Route::get('campaigns/{uid}/template/select', 'CampaignController@templateSelect');

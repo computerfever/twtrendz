@@ -181,7 +181,7 @@
 							'header' => trans('messages.verified_senders'),
 						])
 					</div>
-
+					@if($campaign->admin == 0)
 					@include('helpers.form_control', [
 						'type' => 'autofill',
 						'id' => 'sender_reply_to_input',
@@ -197,6 +197,7 @@
 						]),
 						'header' => trans('messages.verified_senders'),
 					])
+					@endif
 				</div>
 			</div>
 			<div class="col-md-6 segments-select-box">

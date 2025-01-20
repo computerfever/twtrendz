@@ -244,7 +244,12 @@ trait HasTemplate
             $message->setReplyTo($server->default_from_email);
         } else {
             $message->setFrom(array($this->from_email => $this->from_name));
-            $message->setReplyTo($this->reply_to);
+            if($this->admin == 1){
+                $subscriberUser = $subscriber->mailList->customer->user;
+                $message->setReplyTo($subscriberUser->email);
+            }else{
+                $message->setReplyTo($this->reply_to);
+            }
         }
 
         if (!empty(Setting::get('campaign.bcc'))) {

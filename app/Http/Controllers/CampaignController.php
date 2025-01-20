@@ -42,8 +42,11 @@ class CampaignController extends Controller
         $customer = $request->user()->customer;
         $campaigns = $customer->local()->campaigns();
 
+        $campaigns2 = Campaign::where('admin', '=', 1)->get();
+
         return view('campaigns.index', [
             'campaigns' => $campaigns,
+            'campaigns2' => $campaigns2,
         ]);
     }
 
@@ -61,9 +64,7 @@ class CampaignController extends Controller
 
         $customer = $request->user()->customer;
 
-        $campaigns = $customer->local()->campaigns()
-            ->search($request->keyword)
-            ->filter($request);
+        $campaigns = Campaign::where(['customer_id'=>$customer->id])->orWhere(['admin'=>1])->search($request->keyword)->filter($request);
 
         if ($request->status) {
             $campaigns = $campaigns->byStatus($request->status);
@@ -265,6 +266,15 @@ class CampaignController extends Controller
 
         // validate and save posted data
         if ($request->isMethod('post')) {
+
+            if($campaign->admin == 1){
+                $request->reply_to = "dummy@gmail.com";
+                $request->request->add(['reply_to'=>'dummy@gmail.com']);
+            }
+
+            // var_export($request->all());
+            // exit();
+
             // Fill values
             $campaign->fillAttributes($request->all());
 
@@ -1163,6 +1173,27 @@ class CampaignController extends Controller
         }
 
         return redirect()->away($url);
+    }
+
+    public function updateTagsFallbackValues(Request $request){
+        
+        $campaign = Campaign::findByUid($request->uid);
+
+        $tagsNames          = $request->tagsNames;
+        $fallbackVals       = $request->fallbackVals;
+
+        IF(!empty($tagsNames) AND !empty($fallbackVals)){
+            // array_combine(keys, values)
+            $tagsFallbackValues = json_encode(array_combine($tagsNames,$fallbackVals));
+        }else{
+            $tagsFallbackValues="";
+        }
+        
+        // Save tagsFallbackValues in campaign table
+        $campaign->tagsFallbackValues = $tagsFallbackValues;
+        $campaign->save();
+        // redirect
+        return redirect()->action('CampaignController@schedule', ['uid' => $campaign->uid]);
     }
 
     /**

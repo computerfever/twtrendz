@@ -77,6 +77,54 @@
                 </div>
             </div>
 
+            <div class="sub-section">
+                <h2 class="mt-0 mb-3">Tags Fallback Values</h2>
+                <p>The Fallback feature allows you to insert a substitute or alternate value if the data is not available in your subscriber list. Ex: SUBSCRIBER_FIRST_NAME if not available, you could use a substitute. Something like Hello fellow space traveler, if there is no first name in the first name field in the subscriber's record.</p>
+
+                <form method="post" action="{{ action('CampaignController@updateTagsFallbackValues', ['uid'=>$campaign->uid]) }}" id="updateTagsFallbackValuesForm">
+                {{-- <form method="post" action="" id="updateTagsFallbackValuesForm"> --}}
+                    {{ csrf_field() }}
+                    <div class="table-responsive">
+                        <table id="tagsFallbackValues" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Tag</th>
+                                    <th>FallBack Text Value</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if(!empty($campaign->tagsFallbackValues)){ ?>
+                                <?php foreach(json_decode($campaign->tagsFallbackValues) as $key => $value){ ?>
+                                <tr>
+                                    <td>
+                                        <input name="tagsNames[]" type="text" placeholder="SUBSCRIBER_FIRST_NAME" class="form-control" value="{{$key}}" list="tagsNames">
+                                    </td>
+                                    <td>
+                                        <input name="fallbackVals[]" type="text" placeholder="Steve" class="form-control" value="{{$value}}">
+                                    </td>
+                                    <td class="mt-10">
+                                        <button class="btn btn-danger btn-sm rounded btnDelete"><i class="fa fa-trash"></i> Delete</button>
+                                    </td>
+                                </tr>
+                                <?php }} ?>
+                            </tbody>
+                            <datalist id="tagsNames">
+                                @if (count( Acelle\Model\Template::tags($campaign->defaultMailList)) > 0)
+                                    @foreach( Acelle\Model\Template::tags($campaign->defaultMailList) as $tag)
+                                        <option value="{{ $tag["name"] }}">
+                                    @endforeach
+                                @endif
+                            </datalist>
+                        </table>
+                    </div>
+                    <button onclick="addTagsFallbackValues();" class="btn btn-success" type="button">
+                        <i class="fa fa-plus"></i> Add Tag FallBack Value
+                    </button>
+                    <!-- <button type="submit" class="btn btn-secondary visible-hideen">Save Fallback Values</button> -->
+                </form>
+            </div>
+
             @if ($spamscore)
                 <div class="sub-section">
                     <h2 class="mt-0 mb-3">{{ trans('messages.campaign.spam_score') }}</h2>
@@ -108,11 +156,47 @@
     </div>
         
     <hr>
-    <a href="{{ action('CampaignController@schedule', ['uid' => $campaign->uid]) }}" class="btn btn-secondary">
+    {{-- <a href="{{ action('CampaignController@schedule', ['uid' => $campaign->uid]) }}" class="btn btn-secondary">
         {{ trans('messages.next') }} <span class="material-symbols-rounded">arrow_forward</span>
-    </a>
+    </a> --}}
+    <button type="submit" form="updateTagsFallbackValuesForm" class="btn btn-secondary">
+        {{ trans('messages.next') }} <span class="material-symbols-rounded">arrow_forward</span>
+    </button>
         
     <script>
+
+        function addTagsFallbackValues() {
+          html = `
+          <tr>
+                <td>
+                    <input name='tagsNames[]' type='text' placeholder='SUBSCRIBER_FIRST_NAME' class='form-control' value='' list='tagsNames'>
+                </td>
+                <td>
+                    <input name='fallbackVals[]' type='text' placeholder='Steve' class='form-control' value=''>
+                </td>
+                <td class='mt-10'>
+                    <button class='btn btn-danger btn-sm rounded btnDelete'><i class='fa fa-trash'></i> Delete</button>
+                </td>
+            </tr>`;
+          $('#tagsFallbackValues tbody').append(html);
+        }
+
+        $(document).on('click', '.btnDelete', function () {
+          $(this).closest('tr').remove();
+        });
+
+        $(document).on('keydown', '#updateTagsFallbackValuesForm input', function (e) {
+            if(e.keyCode == 13) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        function submitForm() {
+          let form = document.getElementById("updateTagsFallbackValuesForm");
+          form.submit();
+        }
+
         var templatePopup = new Popup();        
     
         $(document).ready(function() {

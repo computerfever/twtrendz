@@ -42,6 +42,8 @@ class TransformTag implements StageInterface
         // Use in case $subscriber or $msgId is null
         $sampleLink = $this->campaign->makeSampleLink();
 
+        $fallbackTags = json_decode($this->campaign->tagsFallbackValues,true);
+
         # Subscriber specific
         if (is_null($this->subscriber) || $this->campaign->isStdClassSubscriber($this->subscriber)) {
             $tags['UNSUBSCRIBE_URL'] = $sampleLink;
@@ -129,8 +131,11 @@ class TransformTag implements StageInterface
 
             # Subscriber custom fields
             foreach ($this->subscriber->mailList->fields as $field) {
+                
                 $tags['SUBSCRIBER_'.$field->tag] = $this->subscriber->getValueByField($field);
+
                 $tags[$field->tag] = $this->subscriber->getValueByField($field);
+
             }
 
             // Special / shortcut fields
@@ -139,6 +144,15 @@ class TransformTag implements StageInterface
         }
 
         // Actually transform the message
+
+        foreach ($tags as $key => $value) {
+            if(empty($tags[$key]) AND !empty($fallbackTags)){
+                if(array_key_exists($key,$fallbackTags)){
+                    $tags[$key] = $fallbackTags[$key];
+                }
+            }
+        }
+
         foreach ($tags as $tag => $value) {
             $html = str_replace('{'.$tag.'}', $value ?? '#', $html);
         }

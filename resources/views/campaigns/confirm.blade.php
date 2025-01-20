@@ -80,8 +80,9 @@
                             {!! $campaign->displayRecipients() !!}
                         </p>
                     </div>
-
+                    @if($campaign->admin == 0)
                     <a href="{{ action('CampaignController@recipients', $campaign->uid) }}" class="btn btn-secondary">{{ trans('messages.edit') }}</a>
+                    @endif
                 </li>
 
                 <li class="d-flex align-items-center">

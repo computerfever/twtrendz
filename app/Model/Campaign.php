@@ -155,6 +155,11 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
             $rules['reply_to'] = 'required|email';
         }
 
+
+        if($this->admin == 1){
+            unset($rules['reply_to']);
+        }
+
         // tracking domain
         if (isset($request) && $request->custom_tracking_domain) {
             $rules['tracking_domain_uid'] = 'required';
@@ -352,7 +357,8 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
         'track_click', 'sign_dkim', 'track_fbl',
         'html', 'plain', 'template_source',
         'tracking_domain_id', 'use_default_sending_server_from_email',
-        'skip_failed_message'
+        'skip_failed_message',
+        'tagsFallbackValues',
     ];
 
     /**
@@ -2308,7 +2314,7 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
         }
 
         if($this->admin == 1){
-            $listsAndSegments = \Acelle\Model\MailList::where('name', '=', 'Newsletter')->get();
+            $listsAndSegments = \Acelle\Model\MailList::where('name', '=', 'Newsletter Testing')->get();
         }
 
         // print_r($listsAndSegments);

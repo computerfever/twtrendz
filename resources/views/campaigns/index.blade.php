@@ -18,13 +18,10 @@
 @endsection
 
 @section('content')
-    <div id="CampaignsIndexContainer" class="listing-form top-sticky"
-        data-url="{{ action('CampaignController@listing') }}"
-        per-page="{{ Acelle\Model\MailList::$itemsPerPage }}"
-    >
+    <div id="CampaignsIndexContainer" class="listing-form top-sticky"data-url="{{ action('CampaignController@listing') }}" per-page="{{ Acelle\Model\MailList::$itemsPerPage }}">
         <div class="d-flex top-list-controls top-sticky-content">
             <div class="me-auto">
-                @if ($campaigns->count() >= 0)
+                
                     <div class="filter-box">
                         <div class="checkbox inline check_all_list">
                             <label>
@@ -62,7 +59,7 @@
                                 <option value="name">{{ trans('messages.name') }}</option>
                             </select>
                             <input type="hidden" name="sort_direction" value="desc" />
-<button type="button" class="btn btn-light sort-direction" data-popup="tooltip" title="{{ trans('messages.change_sort_direction') }}" role="button" class="btn btn-xs">
+                            <button type="button" class="btn btn-light sort-direction" data-popup="tooltip" title="{{ trans('messages.change_sort_direction') }}" role="button" class="btn btn-xs">
                                 <span class="material-symbols-rounded desc">sort</span>
                             </button>
                         </span>
@@ -80,7 +77,7 @@
                             <span class="material-symbols-rounded">search</span>
                         </span>
                     </div>
-                @endif
+                
             </div>
             <div class="text-end">
                 @if (Auth::user()->customer->can('create', new Acelle\Model\Campaign()))

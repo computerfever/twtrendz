@@ -254,6 +254,9 @@ class MailListController extends Controller
      */
     public function update(Request $request, $id)
     {
+    	// var_export($request->all());
+    	// exit();
+
         // Generate info
         $customer = $request->user()->customer;
         $list = \Acelle\Model\MailList::findByUid($request->uid);
