@@ -187,10 +187,14 @@ class ClickLog extends Model
      * @return collect
      */
     public static function search($request, $campaign = null)
-    {
+    {   
+        $customer_id = $request->user()->customer->id;
         $query = self::filter($request);
 
         if (isset($campaign)) {
+            if($campaign->customer_id != $customer_id){
+                $query = $query->join('mail_lists', 'mail_lists.id', '=', 'subscribers.mail_list_id')->where('mail_lists.customer_id', '=', $customer_id);
+            }
             $query = $query->where('tracking_logs.campaign_id', '=', $campaign->id);
         }
 

@@ -64,7 +64,12 @@ class CampaignController extends Controller
 
         $customer = $request->user()->customer;
 
-        $campaigns = Campaign::where(['customer_id'=>$customer->id])->orWhere(['admin'=>1])->search($request->keyword)->filter($request);
+        // $campaigns = Campaign::where(['customer_id'=>$customer->id])->orWhere(['admin'=>1])->search($request->keyword)->filter($request);
+
+        $campaigns = Campaign::where(['customer_id'=>$customer->id])->orWhere(function($query) {
+            // $query->where(['admin'=>'1','status'=>'done']);
+            $query->where('admin', '1')->where('status', 'done');
+        })->search($request->keyword)->filter($request);
 
         if ($request->status) {
             $campaigns = $campaigns->byStatus($request->status);
@@ -129,7 +134,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($id);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -187,7 +192,7 @@ class CampaignController extends Controller
         $customer = $request->user()->customer;
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -775,7 +780,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -784,7 +789,7 @@ class CampaignController extends Controller
         event(new \Acelle\Events\CampaignUpdated($campaign));
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -805,7 +810,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -817,7 +822,7 @@ class CampaignController extends Controller
                           )->groupBy('click_logs.url')->get();
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -841,7 +846,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -953,14 +958,14 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
         $result = [
             [
                 'name' => trans('messages.recipients'),
-                'value' => $campaign->readCache('SubscriberCount', 0),
+                'value' => $campaign->subscribersCount(),
             ],
             [
                 'name' => trans('messages.delivered'),
@@ -1007,7 +1012,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -1049,7 +1054,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -1091,7 +1096,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -1258,7 +1263,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -1278,7 +1283,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -1298,7 +1303,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -1346,7 +1351,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -1366,7 +1371,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -1386,7 +1391,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -1406,7 +1411,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -1426,7 +1431,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -1446,7 +1451,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -1466,7 +1471,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -1486,7 +1491,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -1506,7 +1511,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -1526,7 +1531,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -1546,7 +1551,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -1656,7 +1661,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -1678,7 +1683,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return;
         }
 
@@ -1890,7 +1895,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($id);
 
         // authorize
-        if (\Gate::denies('preview', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('preview', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -1912,7 +1917,7 @@ class CampaignController extends Controller
         $subscriber = Subscriber::find($request->subscriber_id);
 
         // authorize
-        if (\Gate::denies('preview', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('preview', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -2054,7 +2059,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -2076,7 +2081,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -2376,7 +2381,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return;
         }
 
@@ -2395,7 +2400,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -2409,7 +2414,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -2456,7 +2461,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -2619,7 +2624,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 
@@ -2636,7 +2641,7 @@ class CampaignController extends Controller
         $campaign = Campaign::findByUid($request->uid);
 
         // authorize
-        if (\Gate::denies('read', $campaign)) {
+        if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
 

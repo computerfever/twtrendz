@@ -44,6 +44,7 @@ use Acelle\Library\HtmlHandler\TransformUrl;
 use Acelle\Library\BaseCampaign;
 use Acelle\Library\Contracts\CampaignInterface;
 use Acelle\Jobs\SendMessage;
+use Illuminate\Support\Facades\Auth;
 use Closure;
 
 class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInterface
@@ -173,9 +174,20 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
      *
      * @return mixed
      */
-    public function trackingLogs()
-    {
-        return $this->hasMany('Acelle\Model\TrackingLog');
+    public function trackingLogs(){   
+        
+        // $customer_id = Auth::user()->customer->id;
+
+        // if($this->customer_id == $customer_id){
+
+            return $this->hasMany('Acelle\Model\TrackingLog');
+
+        // }else{
+        //     return TrackingLog::select('tracking_logs.*')->join('subscribers', 'subscribers.id', '=', 'tracking_logs.subscriber_id')->join('mail_lists', 'mail_lists.id', '=', 'subscribers.mail_list_id')->where('mail_lists.customer_id', '=', $customer_id);
+        //     return $this->hasMany('Acelle\Model\TrackingLog');
+        // }
+       
+        
     }
 
     /**
@@ -609,8 +621,20 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
      */
     public function deliveredCount()
     {
-        // including bounced, feedbcak...
-        return $this->trackingLogs()->sent()->count();
+
+        $customer_id = Auth::user()->customer->id;
+        
+        if($this->customer_id == $customer_id){
+
+            // including bounced, feedbcak...
+            return $this->trackingLogs()->sent()->count();
+
+        }else{
+
+            return $this->trackingLogs()->join('subscribers', 'subscribers.id', '=', 'tracking_logs.subscriber_id')->join('mail_lists', 'mail_lists.id', '=', 'subscribers.mail_list_id')->where('mail_lists.customer_id', '=', $customer_id)->sent()->count();
+
+        }
+
     }
 
     /**
@@ -620,7 +644,15 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
      */
     public function failedCount()
     {
-        return $this->trackingLogs()->failed()->count();
+
+        $customer_id = Auth::user()->customer->id;
+        
+        if($this->customer_id == $customer_id){
+            return $this->trackingLogs()->failed()->count();
+        }else{
+            return $this->trackingLogs()->join('subscribers', 'subscribers.id', '=', 'tracking_logs.subscriber_id')->join('mail_lists', 'mail_lists.id', '=', 'subscribers.mail_list_id')->where('mail_lists.customer_id', '=', $customer_id)->failed()->count();
+        }
+
     }
 
     /**
@@ -689,11 +721,19 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
      */
     public function clickCount($start = null, $end = null)
     {
+
+        $customer_id = Auth::user()->customer->id;
+
         $query = $this->clickLogs();
+    
+        if($this->customer_id != $customer_id){
+            $query = $query->join('subscribers', 'subscribers.id', '=', 'tracking_logs.subscriber_id')->join('mail_lists', 'mail_lists.id', '=', 'subscribers.mail_list_id')->where('mail_lists.customer_id', '=', $customer_id);
+        }
 
         if (isset($start)) {
             $query = $query->where('click_logs.created_at', '>=', $start);
         }
+
         if (isset($end)) {
             $query = $query->where('click_logs.created_at', '<=', $end);
         }
@@ -756,7 +796,14 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
      */
     public function uniqueOpenCount()
     {
-        return $this->openLogs()->distinct('tracking_logs.subscriber_id')->count();
+
+        $customer_id = Auth::user()->customer->id;
+
+        if($this->customer_id == $customer_id){
+            return $this->openLogs()->distinct('tracking_logs.subscriber_id')->count();
+        }else{
+            return $this->openLogs()->join('subscribers', 'subscribers.id', '=', 'tracking_logs.subscriber_id')->join('mail_lists', 'mail_lists.id', '=', 'subscribers.mail_list_id')->where('mail_lists.customer_id', '=', $customer_id)->distinct('tracking_logs.subscriber_id')->count();
+        }
     }
 
     /**
@@ -776,7 +823,15 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
      */
     public function openUniqCount($start = null, $end = null)
     {
+
+        $customer_id = Auth::user()->customer->id;
+
         $query = $this->openLogs();
+
+        if($this->customer_id == $customer_id){
+            $query = $query->join('subscribers', 'subscribers.id', '=', 'tracking_logs.subscriber_id')->join('mail_lists', 'mail_lists.id', '=', 'subscribers.mail_list_id')->where('mail_lists.customer_id', '=', $customer_id);
+        }
+
         if (isset($start)) {
             $query = $query->where('open_logs.created_at', '>=', $start);
         }
@@ -820,7 +875,15 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
      */
     public function feedbackCount()
     {
-        return $this->feedbackLogs()->distinct('subscriber_id')->count('subscriber_id');
+
+        $customer_id = Auth::user()->customer->id;
+
+        if($this->customer_id == $customer_id){
+            return $this->feedbackLogs()->distinct('subscriber_id')->count('subscriber_id');
+        }else{
+            return $this->feedbackLogs()->join('subscribers', 'subscribers.id', '=', 'tracking_logs.subscriber_id')->join('mail_lists', 'mail_lists.id', '=', 'subscribers.mail_list_id')->where('mail_lists.customer_id', '=', $customer_id)->distinct('subscriber_id')->count('subscriber_id');
+        }
+
     }
 
     /**
@@ -841,7 +904,15 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
 
     public function bounceCount()
     {
-        return $this->bounceLogs()->distinct('subscriber_id')->count('subscriber_id');
+
+        $customer_id = Auth::user()->customer->id;
+
+        if($this->customer_id == $customer_id){
+            return $this->bounceLogs()->distinct('subscriber_id')->count('subscriber_id');
+        }else{
+            return $this->bounceLogs()->join('subscribers', 'subscribers.id', '=', 'tracking_logs.subscriber_id')->join('mail_lists', 'mail_lists.id', '=', 'subscribers.mail_list_id')->where('mail_lists.customer_id', '=', $customer_id)->distinct('subscriber_id')->count('subscriber_id');
+        }
+
     }
 
     /**
@@ -867,7 +938,14 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
      */
     public function unsubscribeCount()
     {
-        return $this->unsubscribeLogs()->distinct('unsubscribe_logs.subscriber_id')->count();
+        $customer_id = Auth::user()->customer->id;
+
+        if($this->customer_id == $customer_id){
+            return $this->unsubscribeLogs()->distinct('unsubscribe_logs.subscriber_id')->count();
+        }else{
+            return $this->unsubscribeLogs()->join('subscribers', 'subscribers.id', '=', 'tracking_logs.subscriber_id')->join('mail_lists', 'mail_lists.id', '=', 'subscribers.mail_list_id')->where('mail_lists.customer_id', '=', $customer_id)->distinct('unsubscribe_logs.subscriber_id')->count();
+        }
+
     }
 
     /**
@@ -2301,6 +2379,12 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
     public function subscribers($params = [])
     {
         // Get subscriber from mailist and segment
+            
+        if (Auth::user()) {
+            $customer_id = Auth::user()->customer->id;
+        }else{
+            $customer_id = NULL;
+        }
 
         if($this->admin == 0){
             $listsAndSegments = [];
@@ -2314,7 +2398,13 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
         }
 
         if($this->admin == 1){
-            $listsAndSegments = \Acelle\Model\MailList::where('name', '=', 'Newsletter Testing')->get();
+
+            if($this->customer_id == $customer_id OR $customer_id == NULL){
+                $listsAndSegments = \Acelle\Model\MailList::where('name', '=', 'Newsletter Testing')->get();
+            }else{
+                $listsAndSegments = \Acelle\Model\MailList::where(['name'=>'Newsletter Testing','customer_id'=>$customer_id])->get();
+            }
+
         }
 
         // print_r($listsAndSegments);

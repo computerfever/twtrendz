@@ -30,7 +30,7 @@
                     @if ($campaign->readCache('SubscriberCount'))
                         <div>
                             <span class="text-semibold" data-popup="tooltip" title="{{ $campaign->displayRecipients() }}">
-                                {{ number_with_delimiter($campaign->readCache('SubscriberCount')) }} {{ trans('messages.recipients') }}
+                                {{ number_with_delimiter($campaign->subscribersCount()) }} {{ trans('messages.recipients') }}
                             </span>
                         </div>
                     @endif
@@ -45,12 +45,12 @@
                 @if ($campaign->status != 'new')
                     <td class="stat-fix-size-sm">
                         <div class="single-stat-box pull-left ml-4">
-                            <span class="no-margin text-primary stat-num">{{ $campaign->isSending() ? number_to_percentage($campaign->deliveredRate(true)) : number_to_percentage($campaign->readCache('DeliveredRate')) }}</span>
+                            <span class="no-margin text-primary stat-num">{{ $campaign->isSending() ? number_to_percentage($campaign->deliveredRate()) : number_to_percentage($campaign->deliveredRate()) }}</span>
                             <div class="progress progress-xxs">
-                                <div class="progress-bar progress-bar-info" style="width: {{ $campaign->isSending() ? number_to_percentage($campaign->deliveredRate(true)) : number_to_percentage($campaign->readCache('DeliveredRate')) }}">
+                                <div class="progress-bar progress-bar-info" style="width: {{ $campaign->isSending() ? number_to_percentage($campaign->deliveredRate()) : number_to_percentage($campaign->deliveredRate()) }}">
                                 </div>
                             </div>
-                            <span class="text-semibold text-nowrap">{{ $campaign->isSending() ? number_with_delimiter($campaign->deliveredCount()) : number_with_delimiter($campaign->readCache('DeliveredCount', 0)) }} / {{ number_with_delimiter($campaign->readCache('SubscriberCount', 0))  }}</span>
+                            <span class="text-semibold text-nowrap">{{ $campaign->isSending() ? number_with_delimiter($campaign->deliveredCount()) : number_with_delimiter($campaign->deliveredCount()) }} / {{ number_with_delimiter($campaign->subscribersCount())  }}</span>
                             <br />
                             <span class="text-muted">{{ trans('messages.sent') }}</span>
                         </div>
