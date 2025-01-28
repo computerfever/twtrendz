@@ -828,7 +828,7 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
 
         $query = $this->openLogs();
 
-        if($this->customer_id == $customer_id){
+        if($this->customer_id != $customer_id){
             $query = $query->join('subscribers', 'subscribers.id', '=', 'tracking_logs.subscriber_id')->join('mail_lists', 'mail_lists.id', '=', 'subscribers.mail_list_id')->where('mail_lists.customer_id', '=', $customer_id);
         }
 

@@ -2072,7 +2072,7 @@ class MailList extends Model
         return $progress;
     }
 
-    public function updateOrCreateFieldsFromRequest($request)
+        public function updateOrCreateFieldsFromRequest($request)
     {
         $rules = [];
         $messages = [];
@@ -2124,37 +2124,22 @@ class MailList extends Model
         $saved_ids = [];
         foreach ($request->fields as $uid => $item) {
             $field = \Acelle\Model\Field::findByUid($item['uid']);
-            $visible = $item['visible'] ?? true;
-            $required = $item['required'] ?? false;
-
-            if (isset($item['tag']) && $item['tag'] == 'EMAIL') {
-                $visible = true;
-                $required = true;
-            }
-
             if (!$field) {
-                $field = $this->createField(
-                    $item['type'],
-                    \Acelle\Model\Field::formatTag($item['tag']),
-                    $item['label'] ?? null,
-                    $defaultValue = $item['default_value'] ?? null,
-                    $required = $required,
-                    $visible = $visible,
-                );
-            } else {
-                $field->type = $item['type'];
-                if (isset($item['tag'])) {
-                    $field->tag = \Acelle\Model\Field::formatTag($item['tag']);
-                }
-                $field->label = $item['label'] ?? null;
-                $field->default_value = $item['default_value'] ?? null;
-                $field->required = $required;
-                $field['visible'] = $visible;
-                $field->save();
+                $field = new \Acelle\Model\Field();
+                $field->mail_list_id = $this->id;
+
+                // assign avaialble field slot
+                $field->custom_field_name = $this->getAvailableField();
             }
 
             // If email field
             if ($this->getEmailField()->uid != $field->uid) {
+                // save exsit field
+                $item['tag'] = \Acelle\Model\Field::formatTag($item['tag']);
+                $field->fill($item);
+                $field->customer_id = $this->customer_id;
+                $field->save();
+
                 // save field options
                 $field->fieldOptions()->delete();
                 if (isset($item['options'])) {
@@ -2165,7 +2150,14 @@ class MailList extends Model
                         $option->save();
                     }
                 }
+            } else {
+                $field->label = $item['label'];
+                $field->default_value = $item['default_value'];
+                $field->save();
             }
+
+            // Actually add the custom field to subscribers table
+            Subscriber::addCustomFieldIfNotExist($field->custom_field_name);
 
             // store save ids
             $saved_ids[] = $field->uid;

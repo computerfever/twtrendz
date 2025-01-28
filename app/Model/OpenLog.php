@@ -77,7 +77,7 @@ class OpenLog extends Model
                 $query = $query->where(function ($q) use ($keyword) {
                     $q->orwhere('campaigns.name', 'like', '%'.$keyword.'%')
                         ->orwhere('open_logs.ip_address', 'like', '%'.$keyword.'%')
-                        ->orwhere('sending_servers.name', 'like', '%'.$keyword.'%')
+                        // ->orwhere('sending_servers.name', 'like', '%'.$keyword.'%')
                         ->orwhere('subscribers.email', 'like', '%'.$keyword.'%');
                 });
             }

@@ -100,8 +100,6 @@ class CampaignController extends Controller
             'clicked' => [],
         ];
 
-
-
         // 24h collection
         if ($request->period == '24h') {
             $hours = [];
@@ -229,7 +227,7 @@ class CampaignController extends Controller
         $result = [
             [
                 'name' => trans('messages.recipients'),
-                'value' => $campaign->readCache('SubscriberCount', 0),
+                'value' => $campaign->subscribersCount(),
             ],
             [
                 'name' => trans('messages.delivered'),

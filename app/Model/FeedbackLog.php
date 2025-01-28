@@ -72,7 +72,7 @@ class FeedbackLog extends Model
                     $q->orwhere('campaigns.name', 'like', '%'.$keyword.'%')
                         ->orwhere('feedback_logs.feedback_type', 'like', '%'.$keyword.'%')
                         ->orwhere('feedback_logs.raw_feedback_content', 'like', '%'.$keyword.'%')
-                        ->orwhere('sending_servers.name', 'like', '%'.$keyword.'%')
+                        // ->orwhere('sending_servers.name', 'like', '%'.$keyword.'%')
                         ->orwhere('subscribers.email', 'like', '%'.$keyword.'%');
                 });
             }

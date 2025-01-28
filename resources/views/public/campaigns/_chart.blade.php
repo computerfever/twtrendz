@@ -17,11 +17,11 @@
     </div>
     <div class="col-md-6">
         <div class="badge-row">
-            <span class="badge bg-secondaryx bg-color0 badge-big me-2">{{ number_to_percentage($campaign->readCache('UniqOpenRate')) }}</span>
+            <span class="badge bg-secondaryx bg-color0 badge-big me-2">{{ number_to_percentage($campaign->openRate()) }}</span>
             {{ trans('messages.opened') }}
             <span class="fw-600">
                 {{ trans('messages.open_uniq_per_total', [
-                    'count' => $campaign->readCache('UniqOpenCount'),
+                    'count' => $campaign->openRate(),
                     'delivered' => $campaign->deliveredCount(),
                 ]) }}
             </span><span class="px-2"> · </span>
@@ -29,19 +29,19 @@
         </div>
 
         <div class="badge-row">
-            <span class="badge bg-secondaryx bg-color1 badge-big me-2">{{ number_to_percentage($campaign->readCache('NotOpenRate', 0)) }}</span>
+            <span class="badge bg-secondaryx bg-color1 badge-big me-2">{{ number_to_percentage($campaign->notOpenRate()) }}</span>
             {{ trans('messages.not_opened') }}
             <span class="fw-600">
                 {{ trans('messages.not_open_per_total', [
-                    'count' => $campaign->readCache('NotOpenCount', 0),
-                    'total' => $campaign->readCache('SubscriberCount', 0),
+                    'count' => $campaign->notOpenCount(),
+                    'total' => $campaign->subscribersCount(),
                 ]) }}
             </span><span class="px-2"> · </span>
             <a class="text-warning" href="{{ action('Pub\CampaignController@subscribers', ['customer_uid' => $campaign->customer->uid, 'uid' => $campaign->uid, 'open' => 'not_opened']) }}"><span class="material-symbols-rounded">arrow_forward</span> {{ trans('messages.view_log') }}</a>
         </div>
 
         <div class="badge-row">
-            <span class="badge bg-secondaryx bg-color2 badge-big me-2">{{ number_to_percentage($campaign->readCache('ClickedRate')) }}</span>
+            <span class="badge bg-secondaryx bg-color2 badge-big me-2">{{ number_to_percentage($campaign->clickRate()) }}</span>
             {{ trans('messages.clicked_emails_rate') }}
             <span class="fw-600">
                 {{ trans('messages.count_clicked_opened', [

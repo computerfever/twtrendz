@@ -50,6 +50,10 @@ class FieldController extends Controller
      */
     public function store(Request $request)
     {
+
+        // print_r($_POST);
+        // exit();
+
         $list = \Acelle\Model\MailList::findByUid($request->list_uid);
         $fields = $list->getFields;
 

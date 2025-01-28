@@ -763,7 +763,7 @@
                             type: 'POST',
                             data: {
                                 _token: CSRF_TOKEN,
-                                filepath: '{{ $filepath }}',
+                                filepath: `{{ str_replace('\\', '/', $filepath); }}`,
                                 mapping: _this.getData(),
                                 @if (config('custom.japan'))
                                     // encoding

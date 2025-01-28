@@ -88,7 +88,7 @@ class UnsubscribeLog extends Model
                     $q->orwhere('campaigns.name', 'like', '%'.$keyword.'%')
                         ->orwhere('unsubscribe_logs.ip_address', 'like', '%'.$keyword.'%')
                         ->orwhere('unsubscribe_logs.user_agent', 'like', '%'.$keyword.'%')
-                        ->orwhere('sending_servers.name', 'like', '%'.$keyword.'%')
+                        // ->orwhere('sending_servers.name', 'like', '%'.$keyword.'%')
                         ->orwhere('subscribers.email', 'like', '%'.$keyword.'%');
                 });
             }

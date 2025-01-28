@@ -1,6 +1,6 @@
 <h2 class="mt-4 mb-4">
     <span class="text-teal text-bold">{{ number_with_delimiter($campaign->subscribersCount()) }}</span>
-    {{ trans('messages.' . \Acelle\Library\Tool::getPluralPrase('recipient', $campaign->readCache('SubscriberCount', 0))) }}
+    {{ trans('messages.' . \Acelle\Library\Tool::getPluralPrase('recipient', $campaign->subscribersCount())) }}
 </h2>
 
 <div class="row fs-7">

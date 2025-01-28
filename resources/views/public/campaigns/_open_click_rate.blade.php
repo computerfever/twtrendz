@@ -9,11 +9,11 @@
             <div class="d-flex">
                 <h4 class="text-semibold mt-0 me-auto">{{ trans('messages.open_rate') }}</h4>
                 <span class="pull-right progress-right-info text-primary">
-                    {{ number_to_percentage($campaign->readCache('UniqOpenRate')) }}
+                    {{ number_to_percentage($campaign->openRate()) }}
                 </span>
             </div>
             <div class="progress progress-sm">
-                <div class="progress-bar bg-color3" style="width: {{ number_to_percentage($campaign->readCache('UniqOpenRate')) }}">
+                <div class="progress-bar bg-color3" style="width: {{ number_to_percentage($campaign->openRate()) }}">
                 </div>
             </div>
         </div>
@@ -21,8 +21,8 @@
             <div class="stat-row">
                 <p class="text-muted">{{ trans('messages.successful_deliveries') }}</p>
                 <span class="pull-right num">
-                    {{ number_with_delimiter($campaign->readCache('DeliveredCount')) }}
-                    <span class="text-muted2">{{ number_to_percentage($campaign->readCache('DeliveredRate')) }}</span>
+                    {{ number_with_delimiter($campaign->deliveredCount()) }}
+                    <span class="text-muted2">{{ number_to_percentage($campaign->deliveredRate()) }}</span>
                 </span>
             </div>
             <div class="stat-row">
@@ -34,7 +34,7 @@
             <div class="stat-row">
                 <p class="text-muted">{{ trans('messages.uniq_opens') }}</p>
                 <span class="pull-right num">
-                    {{ number_with_delimiter($campaign->readCache('UniqOpenCount')) }}
+                    {{ number_with_delimiter($campaign->openUniqCount()) }}
                 </span>
             </div>
             <div class="stat-row">
@@ -53,10 +53,10 @@
         <div class="content-group-sm">
             <div class="d-flex">
                 <h4 class="text-semibold mt-0 me-auto">{{ trans('messages.click_rate') }}</h4>
-                <div class="progress-right-info text-primary">{{ number_to_percentage($campaign->readCache('ClickedRate')) }}</div>
+                <div class="progress-right-info text-primary">{{ number_to_percentage($campaign->clickRate()) }}</div>
             </div>
             <div class="progress progress-sm">
-                <div class="progress-bar bg-color7" style="width: {{ number_to_percentage($campaign->readCache('ClickedRate')) }}">
+                <div class="progress-bar bg-color7" style="width: {{ number_to_percentage($campaign->clickRate()) }}">
                 </div>
             </div>
         </div>

@@ -57,9 +57,9 @@
                     </td>
                     <td class="stat-fix-size-sm">
                         <div class="single-stat-box pull-left ml-4">
-                            <span class="no-margin text-primary stat-num">{{ number_to_percentage($campaign->readCache('UniqOpenRate')) }}</span>
+                            <span class="no-margin text-primary stat-num">{{ number_to_percentage($campaign->openRate()) }}</span>
                             <div class="progress progress-xxs">
-                                <div class="progress-bar progress-bar-info" style="width: {{ number_to_percentage($campaign->readCache('UniqOpenRate')) }}">
+                                <div class="progress-bar progress-bar-info" style="width: {{ number_to_percentage($campaign->openRate()) }}">
                                 </div>
                             </div>
                             <span class="text-muted">{{ trans('messages.open_rate') }}</span>
@@ -67,9 +67,9 @@
                     </td>
                     <td class="stat-fix-size-sm">
                         <div class="single-stat-box pull-left ml-4">
-                            <span class="no-margin text-primary stat-num">{{ number_to_percentage($campaign->readCache('ClickedRate')) }}</span>
+                            <span class="no-margin text-primary stat-num">{{ number_to_percentage($campaign->clickRate()) }}</span>
                             <div class="progress progress-xxs">
-                                <div class="progress-bar progress-bar-info" style="width: {{ number_to_percentage($campaign->readCache('ClickedRate')) }}">
+                                <div class="progress-bar progress-bar-info" style="width: {{ number_to_percentage($campaign->clickRate()) }}">
                                 </div>
                             </div>
                             <span class="text-muted">{{ trans('messages.click_rate') }}</span>

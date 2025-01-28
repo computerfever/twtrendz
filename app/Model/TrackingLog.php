@@ -101,7 +101,7 @@ class TrackingLog extends Model
                 $query = $query->where(function ($q) use ($keyword) {
                     $q->orwhere('campaigns.name', 'like', '%'.$keyword.'%')
                         ->orwhere('tracking_logs.status', 'like', '%'.$keyword.'%')
-                        ->orwhere('sending_servers.name', 'like', '%'.$keyword.'%')
+                        // ->orwhere('sending_servers.name', 'like', '%'.$keyword.'%')
                         ->orwhere('subscribers.email', 'like', '%'.$keyword.'%');
                 });
             }
