@@ -1,0 +1,13 @@
+old/
+guideline/
+vendor/
+vendorOld/
+database/
+zips/
+upgrade/
+storage/
+guideline/
+storage/app/GeoLite2-City.mmdb
+publi/tracking-1.0.0.zip
+.env
+.env.example

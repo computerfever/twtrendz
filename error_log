@@ -1,0 +1,192 @@
+[07-Jan-2025 01:38:04 UTC] PHP Fatal error:  Uncaught ErrorException: include(/home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/../symfony/string/UnicodeString.php): Failed to open stream: No such file or directory in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php:576
+Stack trace:
+#0 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'include(/home1/...', '/home1/fhkgukte...', 576)
+#1 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): include()
+#2 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(427): Composer\Autoload\{closure}('/home1/fhkgukte...')
+#3 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/symfony/console/Helper/Helper.php(65): Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#4 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/symfony/console/Application.php(871): Symfony\Component\Console\Helper\Helper::width('include(/home1/...')
+#5 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/symfony/console/Application.php(840): Symfony\Component\Console\Application->doRenderThrowable(Object(ErrorException), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#6 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(681): Symfony\Component\Console\Application->renderThrowable(Object(ErrorException), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#7 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(185): Illuminate\Foundation\Exceptions\Handler->renderForConsole(Object(Symfony\Component\Console\Output\ConsoleOutput), Object(ErrorException))
+#8 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(171): Illuminate\Foundation\Bootstrap\HandleExceptions->renderForConsole(Object(ErrorException))
+#9 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(ErrorException))
+#10 {main}
+  thrown in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php on line 576
+[07-Jan-2025 01:38:04 UTC] PHP Fatal error:  Uncaught ErrorException: include(/home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/../symfony/error-handler/Error/FatalError.php): Failed to open stream: No such file or directory in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php:576
+Stack trace:
+#0 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'include(/home1/...', '/home1/fhkgukte...', 576)
+#1 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): include()
+#2 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(427): Composer\Autoload\{closure}('/home1/fhkgukte...')
+#3 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(222): Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#4 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(209): Illuminate\Foundation\Bootstrap\HandleExceptions->fatalErrorFromPhpError(Array, 0)
+#5 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleShutdown()
+#6 {main}
+  thrown in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php on line 576
+[07-Jan-2025 01:38:05 UTC] PHP Fatal error:  Uncaught ErrorException: include(/home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/../symfony/string/UnicodeString.php): Failed to open stream: No such file or directory in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php:576
+Stack trace:
+#0 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'include(/home1/...', '/home1/fhkgukte...', 576)
+#1 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): include()
+#2 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(427): Composer\Autoload\{closure}('/home1/fhkgukte...')
+#3 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/symfony/console/Helper/Helper.php(65): Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#4 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/symfony/console/Application.php(871): Symfony\Component\Console\Helper\Helper::width('include(/home1/...')
+#5 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/symfony/console/Application.php(840): Symfony\Component\Console\Application->doRenderThrowable(Object(ErrorException), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#6 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(681): Symfony\Component\Console\Application->renderThrowable(Object(ErrorException), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#7 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(185): Illuminate\Foundation\Exceptions\Handler->renderForConsole(Object(Symfony\Component\Console\Output\ConsoleOutput), Object(ErrorException))
+#8 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(171): Illuminate\Foundation\Bootstrap\HandleExceptions->renderForConsole(Object(ErrorException))
+#9 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(ErrorException))
+#10 {main}
+  thrown in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php on line 576
+[07-Jan-2025 01:38:05 UTC] PHP Fatal error:  Uncaught ErrorException: include(/home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/../symfony/error-handler/Error/FatalError.php): Failed to open stream: No such file or directory in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php:576
+Stack trace:
+#0 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'include(/home1/...', '/home1/fhkgukte...', 576)
+#1 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): include()
+#2 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(427): Composer\Autoload\{closure}('/home1/fhkgukte...')
+#3 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(222): Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#4 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(209): Illuminate\Foundation\Bootstrap\HandleExceptions->fatalErrorFromPhpError(Array, 0)
+#5 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleShutdown()
+#6 {main}
+  thrown in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php on line 576
+[07-Jan-2025 01:41:58 UTC] PHP Fatal error:  Uncaught ErrorException: include(/home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/../symfony/string/UnicodeString.php): Failed to open stream: No such file or directory in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php:576
+Stack trace:
+#0 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'include(/home1/...', '/home1/fhkgukte...', 576)
+#1 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): include()
+#2 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(427): Composer\Autoload\{closure}('/home1/fhkgukte...')
+#3 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/symfony/console/Helper/Helper.php(65): Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#4 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/symfony/console/Application.php(871): Symfony\Component\Console\Helper\Helper::width('include(/home1/...')
+#5 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/symfony/console/Application.php(840): Symfony\Component\Console\Application->doRenderThrowable(Object(ErrorException), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#6 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(681): Symfony\Component\Console\Application->renderThrowable(Object(ErrorException), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#7 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(185): Illuminate\Foundation\Exceptions\Handler->renderForConsole(Object(Symfony\Component\Console\Output\ConsoleOutput), Object(ErrorException))
+#8 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(171): Illuminate\Foundation\Bootstrap\HandleExceptions->renderForConsole(Object(ErrorException))
+#9 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(ErrorException))
+#10 {main}
+  thrown in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php on line 576
+[07-Jan-2025 01:41:58 UTC] PHP Fatal error:  Uncaught ErrorException: include(/home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/../symfony/error-handler/Error/FatalError.php): Failed to open stream: No such file or directory in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php:576
+Stack trace:
+#0 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'include(/home1/...', '/home1/fhkgukte...', 576)
+#1 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): include()
+#2 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(427): Composer\Autoload\{closure}('/home1/fhkgukte...')
+#3 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(222): Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#4 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(209): Illuminate\Foundation\Bootstrap\HandleExceptions->fatalErrorFromPhpError(Array, 0)
+#5 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleShutdown()
+#6 {main}
+  thrown in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php on line 576
+[15-Jan-2025 05:42:16 UTC] PHP Fatal error:  Uncaught ErrorException: include(/home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/../symfony/string/UnicodeString.php): Failed to open stream: No such file or directory in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php:576
+Stack trace:
+#0 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'include(/home1/...', '/home1/fhkgukte...', 576)
+#1 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): include()
+#2 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(427): Composer\Autoload\{closure}('/home1/fhkgukte...')
+#3 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/symfony/console/Helper/Helper.php(65): Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#4 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/symfony/console/Application.php(871): Symfony\Component\Console\Helper\Helper::width('include(/home1/...')
+#5 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/symfony/console/Application.php(840): Symfony\Component\Console\Application->doRenderThrowable(Object(ErrorException), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#6 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(681): Symfony\Component\Console\Application->renderThrowable(Object(ErrorException), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#7 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(185): Illuminate\Foundation\Exceptions\Handler->renderForConsole(Object(Symfony\Component\Console\Output\ConsoleOutput), Object(ErrorException))
+#8 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(171): Illuminate\Foundation\Bootstrap\HandleExceptions->renderForConsole(Object(ErrorException))
+#9 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(ErrorException))
+#10 {main}
+  thrown in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php on line 576
+[15-Jan-2025 05:42:16 UTC] PHP Fatal error:  Uncaught ErrorException: include(/home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/../symfony/error-handler/Error/FatalError.php): Failed to open stream: No such file or directory in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php:576
+Stack trace:
+#0 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'include(/home1/...', '/home1/fhkgukte...', 576)
+#1 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): include()
+#2 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(427): Composer\Autoload\{closure}('/home1/fhkgukte...')
+#3 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(222): Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#4 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(209): Illuminate\Foundation\Bootstrap\HandleExceptions->fatalErrorFromPhpError(Array, 0)
+#5 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleShutdown()
+#6 {main}
+  thrown in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php on line 576
+[15-Jan-2025 05:42:17 UTC] PHP Fatal error:  Uncaught ErrorException: include(/home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/../symfony/string/UnicodeString.php): Failed to open stream: No such file or directory in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php:576
+Stack trace:
+#0 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'include(/home1/...', '/home1/fhkgukte...', 576)
+#1 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): include()
+#2 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(427): Composer\Autoload\{closure}('/home1/fhkgukte...')
+#3 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/symfony/console/Helper/Helper.php(65): Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#4 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/symfony/console/Application.php(871): Symfony\Component\Console\Helper\Helper::width('include(/home1/...')
+#5 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/symfony/console/Application.php(840): Symfony\Component\Console\Application->doRenderThrowable(Object(ErrorException), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#6 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(681): Symfony\Component\Console\Application->renderThrowable(Object(ErrorException), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#7 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(185): Illuminate\Foundation\Exceptions\Handler->renderForConsole(Object(Symfony\Component\Console\Output\ConsoleOutput), Object(ErrorException))
+#8 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(171): Illuminate\Foundation\Bootstrap\HandleExceptions->renderForConsole(Object(ErrorException))
+#9 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(ErrorException))
+#10 {main}
+  thrown in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php on line 576
+[15-Jan-2025 05:42:17 UTC] PHP Fatal error:  Uncaught ErrorException: include(/home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/../symfony/error-handler/Error/FatalError.php): Failed to open stream: No such file or directory in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php:576
+Stack trace:
+#0 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'include(/home1/...', '/home1/fhkgukte...', 576)
+#1 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): include()
+#2 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(427): Composer\Autoload\{closure}('/home1/fhkgukte...')
+#3 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(222): Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#4 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(209): Illuminate\Foundation\Bootstrap\HandleExceptions->fatalErrorFromPhpError(Array, 0)
+#5 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleShutdown()
+#6 {main}
+  thrown in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php on line 576
+[15-Jan-2025 05:42:17 UTC] PHP Fatal error:  Uncaught ErrorException: include(/home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/../symfony/string/UnicodeString.php): Failed to open stream: No such file or directory in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php:576
+Stack trace:
+#0 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'include(/home1/...', '/home1/fhkgukte...', 576)
+#1 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): include()
+#2 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(427): Composer\Autoload\{closure}('/home1/fhkgukte...')
+#3 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/symfony/console/Helper/Helper.php(65): Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#4 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/symfony/console/Application.php(871): Symfony\Component\Console\Helper\Helper::width('include(/home1/...')
+#5 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/symfony/console/Application.php(840): Symfony\Component\Console\Application->doRenderThrowable(Object(ErrorException), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#6 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(681): Symfony\Component\Console\Application->renderThrowable(Object(ErrorException), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#7 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(185): Illuminate\Foundation\Exceptions\Handler->renderForConsole(Object(Symfony\Component\Console\Output\ConsoleOutput), Object(ErrorException))
+#8 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(171): Illuminate\Foundation\Bootstrap\HandleExceptions->renderForConsole(Object(ErrorException))
+#9 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(ErrorException))
+#10 {main}
+  thrown in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php on line 576
+[15-Jan-2025 05:42:17 UTC] PHP Fatal error:  Uncaught ErrorException: include(/home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/../symfony/error-handler/Error/FatalError.php): Failed to open stream: No such file or directory in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php:576
+Stack trace:
+#0 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'include(/home1/...', '/home1/fhkgukte...', 576)
+#1 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): include()
+#2 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(427): Composer\Autoload\{closure}('/home1/fhkgukte...')
+#3 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(222): Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#4 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(209): Illuminate\Foundation\Bootstrap\HandleExceptions->fatalErrorFromPhpError(Array, 0)
+#5 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleShutdown()
+#6 {main}
+  thrown in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php on line 576
+[15-Jan-2025 05:42:18 UTC] PHP Fatal error:  Uncaught ErrorException: include(/home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/../symfony/string/UnicodeString.php): Failed to open stream: No such file or directory in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php:576
+Stack trace:
+#0 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'include(/home1/...', '/home1/fhkgukte...', 576)
+#1 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): include()
+#2 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(427): Composer\Autoload\{closure}('/home1/fhkgukte...')
+#3 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/symfony/console/Helper/Helper.php(65): Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#4 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/symfony/console/Application.php(871): Symfony\Component\Console\Helper\Helper::width('include(/home1/...')
+#5 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/symfony/console/Application.php(840): Symfony\Component\Console\Application->doRenderThrowable(Object(ErrorException), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#6 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(681): Symfony\Component\Console\Application->renderThrowable(Object(ErrorException), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#7 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(185): Illuminate\Foundation\Exceptions\Handler->renderForConsole(Object(Symfony\Component\Console\Output\ConsoleOutput), Object(ErrorException))
+#8 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(171): Illuminate\Foundation\Bootstrap\HandleExceptions->renderForConsole(Object(ErrorException))
+#9 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(ErrorException))
+#10 {main}
+  thrown in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php on line 576
+[15-Jan-2025 05:42:18 UTC] PHP Fatal error:  Uncaught ErrorException: include(/home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/../symfony/error-handler/Error/FatalError.php): Failed to open stream: No such file or directory in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php:576
+Stack trace:
+#0 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'include(/home1/...', '/home1/fhkgukte...', 576)
+#1 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): include()
+#2 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(427): Composer\Autoload\{closure}('/home1/fhkgukte...')
+#3 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(222): Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#4 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(209): Illuminate\Foundation\Bootstrap\HandleExceptions->fatalErrorFromPhpError(Array, 0)
+#5 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleShutdown()
+#6 {main}
+  thrown in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php on line 576
+[15-Jan-2025 05:44:26 UTC] PHP Fatal error:  Uncaught ErrorException: include(/home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/../symfony/string/UnicodeString.php): Failed to open stream: No such file or directory in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php:576
+Stack trace:
+#0 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'include(/home1/...', '/home1/fhkgukte...', 576)
+#1 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): include()
+#2 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(427): Composer\Autoload\{closure}('/home1/fhkgukte...')
+#3 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/symfony/console/Helper/Helper.php(65): Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#4 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/symfony/console/Application.php(871): Symfony\Component\Console\Helper\Helper::width('include(/home1/...')
+#5 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/symfony/console/Application.php(840): Symfony\Component\Console\Application->doRenderThrowable(Object(ErrorException), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#6 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(681): Symfony\Component\Console\Application->renderThrowable(Object(ErrorException), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#7 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(185): Illuminate\Foundation\Exceptions\Handler->renderForConsole(Object(Symfony\Component\Console\Output\ConsoleOutput), Object(ErrorException))
+#8 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(171): Illuminate\Foundation\Bootstrap\HandleExceptions->renderForConsole(Object(ErrorException))
+#9 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(ErrorException))
+#10 {main}
+  thrown in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php on line 576
+[15-Jan-2025 05:44:26 UTC] PHP Fatal error:  Uncaught ErrorException: include(/home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/../symfony/error-handler/Error/FatalError.php): Failed to open stream: No such file or directory in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php:576
+Stack trace:
+#0 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'include(/home1/...', '/home1/fhkgukte...', 576)
+#1 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(576): include()
+#2 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php(427): Composer\Autoload\{closure}('/home1/fhkgukte...')
+#3 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(222): Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#4 /home1/fhkgukte/public_html/app.twtrendz.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(209): Illuminate\Foundation\Bootstrap\HandleExceptions->fatalErrorFromPhpError(Array, 0)
+#5 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleShutdown()
+#6 {main}
+  thrown in /home1/fhkgukte/public_html/app.twtrendz.com/vendor/composer/ClassLoader.php on line 576
