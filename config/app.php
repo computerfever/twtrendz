@@ -2,6 +2,8 @@
 
 return [
 
+    'blockscss'             => file_get_contents(config_path('blockscss.css')),
+     
     /*
     |--------------------------------------------------------------------------
     | Application Name

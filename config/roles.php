@@ -3,6 +3,7 @@
 // Default roles and permissions
 return [
     'organization_admin' => [
+        'landing_pages.full_access',
         'campaign.full_access',
         'list.full_access',
         'automation.full_access',
@@ -14,6 +15,7 @@ return [
     ],
 
     'organization_readonly' => [
+        // 'landing_pages.read_only',
         'campaign.read_only',
         'list.read_only',
         'automation.read_only',

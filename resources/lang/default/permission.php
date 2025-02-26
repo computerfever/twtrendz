@@ -1,8 +1,15 @@
 <?php return array (
+    
+    'landing_pages.full_access.title' => 'Full Access',
+    'landing_pages.full_access.desc' => 'Full access to create, view, edit, run and delete email landing pages.',
+    'landing_pages.read_only.title' => 'Read Only',
+    'landing_pages.read_only.desc' => 'View only access to email landing pages.',
+
     'campaign.full_access.title' => 'Full Access',
     'campaign.full_access.desc' => 'Full access to create, view, edit, run and delete email campaigns.',
     'campaign.read_only.title' => 'Read Only',
     'campaign.read_only.desc' => 'View only access to email campaigns.',
+
     'list.full_access.title' => 'Full Access',
     'list.full_access.desc' => 'Full access to create, view, edit and delete email lists.',
     'list.read_only.title' => 'Read Only',
@@ -37,6 +44,7 @@
     'account.read_only.title' => 'Read Only',
     'account.read_only.desc' => 'View all other resources without the ability to edit or change them (e.g., blacklist, website, etc.).',
 
+    'group.landing_pages' => 'Landing Pages',
     'group.campaign' => 'Campaign',
     'group.list' => 'Mail List',
     'group.automation' => 'Automation',

@@ -4,6 +4,17 @@
 <!-- jQuery -->
 <script type="text/javascript" src="{{ AppUrl::asset('core/js/jquery-3.6.4.min.js') }}"></script>
 
+<!-- LoginPageStyles -->
+<link rel="stylesheet" type="text/css" href="{{ URL::asset('core/loginpage.css') }}">
+
+@if(@$inlcudeModuleCoreCssJs)
+    <!-- ZillaPage Modules Core Javascript File -->
+    <script src="{{ Module::asset('core:core/core.js') }}" ></script>
+
+    <!-- ZillaPage Modules Core Css File -->
+    <link rel="stylesheet" href="{{ Module::asset('core:app/css/customize.css') }}">
+@endif
+
 <!-- Bootstrap -->
 <link rel="stylesheet" type="text/css" href="{{ AppUrl::asset('core/bootstrap/css/bootstrap.min.css') }}">
 <script type="text/javascript" src="{{ AppUrl::asset('core/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

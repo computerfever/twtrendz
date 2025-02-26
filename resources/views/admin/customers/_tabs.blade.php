@@ -11,6 +11,13 @@
             <span class="material-symbols-rounded">maps_home_work</span> {{ trans('messages.contact_information') }}</a>
         </li>
         <li class="nav-item 
+        {{ @$menu == 'users' ? 'active' : '' }}
+        text-semibold"><a class="nav-link" href="{{ action('Admin\UserController@index', [
+            'customer_uid' => $customer->uid,
+        ]) }}">
+            <span class="material-symbols-rounded">group</span> {{ trans('messages.users') }}</a>
+        </li>
+        <li class="nav-item 
         {{ request()->route()->getActionName() == 'Acelle\Http\Controllers\Admin\CustomerController@subscriptions' ? 'active' : '' }}
         text-semibold"><a class="nav-link" href="{{ action('Admin\CustomerController@subscriptions', $customer->uid) }}">
             <span class="material-symbols-rounded">assignment_turned_in</span> {{ trans('messages.subscriptions') }}</a>

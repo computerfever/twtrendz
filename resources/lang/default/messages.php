@@ -1,4 +1,10 @@
 <?php return array (
+
+    'permission.landing_pages.full_access.title' => 'Full Access',
+    'permission.landing_pages.full_access.desc' => 'Full access to create, view, edit, run and delete email landing pages.',
+    'permission.landing_pages.read_only.title' => 'Read Only',
+    'permission.landing_pages.read_only.desc' => 'View only access to email landing pages.',
+  
   '1st_week' => '1st week',
   '24h_performance' => '24-hour performance',
   '2fa.email.code_not_match' => 'The verification code does not match',

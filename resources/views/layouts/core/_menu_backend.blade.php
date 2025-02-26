@@ -1,5 +1,7 @@
 @php $menu = $menu ?? false @endphp
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
 <nav class="navbar navbar-expand-xl navbar-dark fixed-top navbar-main py-0 navbar-backend">
     <div class="container-fluid ms-0">
         <a class="navbar-brand d-flex align-items-center me-2" href="{{ action('Admin\HomeController@index') }}">
@@ -26,6 +28,50 @@
 						</i>
 						<span>{{ trans('messages.dashboard') }}</span>
 					</a>
+				</li>
+
+				<li class="nav-item dropdown language-switch">
+					<a role="button" class="nav-link lvl-1 dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
+						<i class="navbar-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-template" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+								<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+								<path d="M4 4m0 1a1 1 0 0 1 1 -1h14a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-14a1 1 0 0 1 -1 -1z"></path>
+								<path d="M4 12m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"></path>
+								<path d="M14 12l6 0"></path>
+								<path d="M14 16l6 0"></path>
+								<path d="M14 20l6 0"></path>
+						 </svg>
+						</i>
+						<span>Landing Pages</span>
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu {{ in_array($menu, ['templates','categories','groupcategories','blocks','blockscategories']) ? 'show' : '' }}" aria-labelledby="audience-menu">
+						<li class="nav-item {{ in_array($menu, ['templates']) ? 'active' : '' }}">
+							<a class="dropdown-item d-flex align-items-center" href="{{url('settings/templates')}}">
+								<span class="navbar-icon"><i class="fa-solid fa-border-all"></i></span> <span>Templates</span>
+							</a>
+						</li>
+						<li class="nav-item {{ in_array($menu, ['categories']) ? 'active' : '' }}">
+							<a class="dropdown-item d-flex align-items-center" href="{{url('settings/categories')}}">
+								<span class="navbar-icon"><i class="fa-solid fa-border-all"></i></span> <span>Templates Categories</span>
+							</a>
+						</li>
+						<li class="nav-item {{ in_array($menu, ['groupcategories']) ? 'active' : '' }}">
+							<a class="dropdown-item d-flex align-items-center" href="{{url('settings/groupcategories')}}">
+								<span class="navbar-icon"><i class="fa-solid fa-border-all"></i></span> <span>Group Categories</span>
+							</a>
+						</li>
+						<li class="nav-item {{ in_array($menu, ['blocks']) ? 'active' : '' }}">
+							<a class="dropdown-item d-flex align-items-center" href="{{url('settings/blocks')}}">
+								<span class="navbar-icon"><i class="fa-solid fa-border-all"></i></span> <span>Blocks</span>
+							</a>
+						</li>
+						<li class="nav-item {{ in_array($menu, ['blockscategories']) ? 'active' : '' }}">
+							<a class="dropdown-item d-flex align-items-center" href="{{url('settings/block-categories')}}">
+								<span class="navbar-icon"><i class="fa-solid fa-border-all"></i></span> <span>Block Categories</span>
+							</a>
+						</li>
+					</ul>
 				</li>
 
 				@if (Auth::user()->can("read", new Acelle\Model\Customer()))
