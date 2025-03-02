@@ -132,7 +132,7 @@ class TransformTag implements StageInterface
             # Subscriber custom fields
             foreach ($this->subscriber->mailList->fields as $field) {
                 $tags['SUBSCRIBER_'.$field->tag] = $this->subscriber->getValueByField($field);
-                $tags[$field->tag] = $this->subscriber->getValueByField($field);
+                // $tags[$field->tag] = $this->subscriber->getValueByField($field);
             }
 
             // Special / shortcut fields
