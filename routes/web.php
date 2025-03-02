@@ -372,6 +372,9 @@ Route::group(['middleware' => ['not_installed', 'auth', 'frontend', '2fa']], fun
     Route::match(['get', 'post'], 'account/billing/edit', 'AccountController@editBillingAddress');
 });
 
+    Route::get('/', 'HomeController@index');
+
+
 Route::group(['middleware' => ['not_installed', 'auth', 'frontend', 'subscription', '2fa']], function () {
     // 2FA settings
     Route::get('account/2fa', 'TwoFAController@index');
@@ -387,7 +390,6 @@ Route::group(['middleware' => ['not_installed', 'auth', 'frontend', 'subscriptio
     Route::get('/search/campaigns', 'SearchController@campaigns');
     Route::get('/search/general', 'SearchController@general');
 
-    Route::get('/', 'HomeController@index');
     Route::get('frontend/docs/api/v1', 'Controller@docsApiV1');
 
     Route::get('account/api/renew', 'AccountController@renewToken');

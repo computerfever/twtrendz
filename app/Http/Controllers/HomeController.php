@@ -20,6 +20,11 @@ class HomeController extends Controller
 
         if($domain == getAppDomain()){
 
+            if(!$request->user()){
+                // return route('login');
+                return redirect('login');
+            }
+
             event(new \Acelle\Events\UserUpdated($request->user()->customer));
             $currentTimezone = $request->user()->customer->getTimezone();
 
