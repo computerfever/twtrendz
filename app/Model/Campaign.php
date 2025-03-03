@@ -2400,7 +2400,7 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
         if($this->admin == 1){
 
             if($this->customer_id == $customer_id OR $customer_id == NULL){
-                $listsAndSegments = \Acelle\Model\MailList::where('name', '=', 'Newsletter')->get();
+                $listsAndSegments = \Acelle\Model\MailList::select('mail_lists.*')->leftJoin('subscriptions', 'subscriptions.customer_id', '=', 'mail_lists.customer_id')->where('subscriptions.status','=','active')->where('mail_lists.name', '=', 'Newsletter')->get();
             }else{
                 $listsAndSegments = \Acelle\Model\MailList::where(['name'=>'Newsletter','customer_id'=>$customer_id])->get();
             }
