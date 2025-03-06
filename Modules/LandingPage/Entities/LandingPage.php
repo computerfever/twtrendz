@@ -27,6 +27,7 @@ class LandingPage extends Model
 
     protected $fillable = [
         'user_id',
+        'admin_id',
         'template_id',
         'name',
         'thank_you_page_html',
