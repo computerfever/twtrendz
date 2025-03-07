@@ -48,7 +48,12 @@
 
     <body class="">
         <div id="loadingMessage">
-          <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+            <div class="lds-ring">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
         </div>
 
         @if($check_remove_brand == false)

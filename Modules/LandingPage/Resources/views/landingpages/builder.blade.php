@@ -29,7 +29,7 @@
     <!-- grapesjs-0.17.4 = grapes.min.js Ends -->
 
     <!-- grapesjs-plugin-ckeditor-1.0.1 = grapesjs-plugin-ckeditor.js Starts -->
-    <script src="https://cdn.ckeditor.com/4.21.0/standard-all/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.25.1-lts/standard-all/ckeditor.js"></script>
 
     <script src="{{ Module::asset('landingpage:js/grapesjs-plugin-ckeditor.js') }}"></script>
     <!-- grapesjs-plugin-ckeditor-1.0.1 = grapesjs-plugin-ckeditor.js Ends -->

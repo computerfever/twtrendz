@@ -13,6 +13,8 @@ use Acelle\Model\Plugin;
 use Acelle\Model\Notification;
 use Acelle\Library\Facades\Hook;
 use Acelle\Library\SubscriptionManager;
+use Illuminate\Pagination\Paginator;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -42,6 +44,9 @@ class AppServiceProvider extends ServiceProvider
         // Load application's plugins
         // Disabled plugin may also register hooks
         Plugin::autoloadWithoutDbQuery();
+
+// Using Bootstrap pagination views
+        Paginator::useBootstrap();
 
         // Register plugins' registered translation folders
         foreach (Hook::execute('add_translation_file') as $source) {
