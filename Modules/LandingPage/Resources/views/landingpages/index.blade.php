@@ -90,10 +90,12 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" style="">
                       <a href="{{ route('landingpages.builder', $item->code) }}" class="dropdown-item">Builder</a>
+                      @if($item->admin == 0)
                       <form method="post" action="{{ route('landingpages.clone', $item) }}" >
                         @csrf
                         <button type="submit" class="dropdown-item">@lang('Clone')</button>
                       </form>
+                      @endif
                       <form method="post" action="{{ route('landingpages.delete', $item->code) }}" onsubmit="return confirm('@lang('Confirm delete?')');">
                         @csrf
                         <button class="dropdown-item">@lang('Delete')</button>
