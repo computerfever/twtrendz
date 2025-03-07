@@ -223,11 +223,15 @@ class FormDataController extends Controller
 	} 
 
 	public function submission($code,Request $request){
+		
 		$page = LandingPage::where('code', $code)->first();
 
 		if (!$page) {
 			return response()->json(['error'=>__("Not found page id")]);
 		}
+
+		$pageUrl = str_replace(["http://","https://"], "", $_SERVER['HTTP_REFERER']);
+		$pageUrl = substr($pageUrl, 0, -1);
 
 		$tracking = Browser::detect();
 
@@ -280,10 +284,10 @@ class FormDataController extends Controller
 			]);
 		   
 			if(checkSettingsAutoresponder($page,$form_data)){
-				AutoresponderLandingPage::dispatch($page,$form_data);
+				AutoresponderLandingPage::dispatch($page,$form_data,$pageUrl);
 			}
 			if(ruleIntergrationForAddContact($page,$form_data)){
-				IntergrationLandingPage::dispatch($page,$form_data);
+				IntergrationLandingPage::dispatch($page,$form_data,$pageUrl);
 			}
 
 			return response()->json([

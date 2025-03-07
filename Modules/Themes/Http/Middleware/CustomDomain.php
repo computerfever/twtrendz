@@ -28,14 +28,17 @@ class CustomDomain{
 
         if(!empty($user)){
         	$page= LandingPage::where('admin',1)->publish()->firstOrFail();
+        	$landingPageUser = $user; 
        	}else{
 			$page = LandingPage::where('custom_domain', $domain)->orWhere('sub_domain', $domain)->publish()->firstOrFail();
+			$landingPageUser = null;
 		}
 
 		// Append domain and tenant to the Request object
 		$request->merge([
 			'domain' => $domain,
-			'page' => $page
+			'page' => $page,
+			'landingPageUser'=>$landingPageUser
 		]);
 
 		return $next($request);

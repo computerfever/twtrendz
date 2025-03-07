@@ -18,15 +18,17 @@ class IntergrationLandingPage implements ShouldQueue{
 
 	protected $item; // item or landing page
 	protected $form_data;
+	protected $pageUrl;
 	
 	/**
 	 * Create a new job instance.
 	 *
 	 * @return void
 	 */
-	public function __construct($item, FormData $form_data){
+	public function __construct($item, FormData $form_data, $pageUrl){
 		$this->item = $item;
 		$this->form_data = $form_data;
+		$this->pageUrl = $pageUrl;
 	}
 
 	/**
@@ -37,6 +39,7 @@ class IntergrationLandingPage implements ShouldQueue{
 
 	public function handle(){
 		$form_data = $this->form_data;
+		$pageUrl = $this->pageUrl;
 		$intergration = $this->item->settings->intergration;
 
 		switch ($intergration->type) {
@@ -67,6 +70,15 @@ class IntergrationLandingPage implements ShouldQueue{
 				$api_token = $settings->api_token;
 
 				$tags = config('app.name').",".$this->item->name;
+
+				$user = \Acelle\Model\User::where('url',$pageUrl)->first();
+				if(!empty($user)){
+					
+					$api_token = $user->api_token;
+					$customer = $user->customer;
+					$settings->mailing_list = \Acelle\Model\MailList::where(['customer_id'=>$customer->id,'name'=>'Newsletter'])->first()->uid;
+
+				}
 
 				$acellemail = new Acellemail($api_endpoint, $api_token);
 				$response = $acellemail->addContact($settings, $form_data->field_values,$tags);

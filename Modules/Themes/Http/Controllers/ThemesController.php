@@ -38,9 +38,13 @@ class ThemesController extends Controller{
 			$fontCurrently = $page->settings->fontCurrently;
 		}
 
-		$customer = $page->customer;
-
 		$html = $page->html;
+		
+		if($request->landingPageUser != null){
+			$customer = $request->landingPageUser->customer;
+		}else{
+			$customer = $page->customer;
+		}
 
 		$tags = [];
 	    $tags['CONSULTANT_ID'] = @$customer->contact->consultant_id;
@@ -53,7 +57,7 @@ class ThemesController extends Controller{
         $tags['URL'] = @$customer->contact->url;
         $tags['image'] = @$customer->contact->image;
         $tags['profile_photo'] = @$customer->user->getProfileImageUrl();
-
+	    
 		foreach ($tags as $tag => $value) {
             $html = str_replace('{'.$tag.'}', $value ?? '#', $html);
         }
