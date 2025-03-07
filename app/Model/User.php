@@ -98,7 +98,7 @@ class User extends Authenticatable
     }
 
     public function customerLandingPageUrl(){
-        return explode("@", $this->email)[0].".".getAppDomain();
+        return str_replace(".","_", explode("@", $this->email)[0]).".".str_replace("app.", "", getAppDomain());
     }
 
     public function admin()
