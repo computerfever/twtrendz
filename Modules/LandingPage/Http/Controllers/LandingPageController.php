@@ -41,7 +41,9 @@ class LandingPageController extends Controller{
 		    abort(404);
 		}
 
-		$data = LandingPage::where('user_id', $request->user()->customer->id);
+		$data = LandingPage::where(['user_id'=> $request->user()->customer->id])->orWhere(function($query) {
+            $query->where('admin', '1')->where('is_publish', 1);
+        });
 
 		if ($request->filled('search')) {
 			$data->where('name', 'like', '%' . $request->search . '%');
@@ -52,9 +54,13 @@ class LandingPageController extends Controller{
 
 		$categories = Category::get();
 
+		// $customerLandingPageUrl = explode("@", $request->user()->email)[0].".".getAppDomain();
+		$customerLandingPageUrl = $request->user()->customerLandingPageUrl();
+
 		$data2 = [
 			'data' => $data,
 			'categories' => $categories,
+			'customerLandingPageUrl' => $customerLandingPageUrl,
 		];
 
 		return view('landingpage::landingpages.index', $data2);
@@ -86,6 +92,7 @@ class LandingPageController extends Controller{
 	}
 
 	public function save(Request $request){
+
 		// random subdomain
 		$request->request->add(['sub_domain' => generateRandomString(8).'.'.env('DB_Module_DOMAIN')]);
 
@@ -96,6 +103,24 @@ class LandingPageController extends Controller{
 			'sub_domain'     => 'regex:/^(?:[-A-Za-z0-9]+\.)+[A-Za-z]{2,6}$/|unique:landingPageModules.landing_pages|min:5'
 			]
 		);
+
+		if($request->has('type')){
+
+			if($request->type == "admin"){
+				$admin = 1;
+
+				if(LandingPage::where(['admin'=> 1])->count() == 1){
+					return back()->with('error', __('Landing Page Already Created For Users.'));
+				}
+
+			}else{
+				$admin = 0;
+			}
+
+		}else{
+			$admin = 0;
+		}
+
 		$sub_domain = $request->input('sub_domain');
 		$template_id = $request->input('template_id');
 
@@ -118,6 +143,7 @@ class LandingPageController extends Controller{
 
 			$item = LandingPage::create([
 				'user_id'  => $request->user()->customer->id,
+				'admin'  => $admin,
 				'name' => $request->input('name'),
 				'html' => $template->content,
 				'css' => $template->style,

@@ -24,8 +24,13 @@ class CustomDomain{
 			return $next($request);
 		}
 		// check domain customize landing page
-		$page = LandingPage::where('custom_domain', $domain)
-						->orWhere('sub_domain', $domain)->publish()->firstOrFail();
+		$user = \Acelle\Model\User::where('url',$domain)->first();
+
+        if(!empty($user)){
+        	$page= LandingPage::where('admin',1)->publish()->firstOrFail();
+       	}else{
+			$page = LandingPage::where('custom_domain', $domain)->orWhere('sub_domain', $domain)->publish()->firstOrFail();
+		}
 
 		// Append domain and tenant to the Request object
 		$request->merge([

@@ -33,13 +33,35 @@ class ThemesController extends Controller{
 
 		$blockscss = replaceVarContentStyle(config('app.blockscss'));
 		$fontCurrently = "Open Sans";
+		
 		if(isset($page->settings->fontCurrently)){
 			$fontCurrently = $page->settings->fontCurrently;
 		}
+
+		$customer = $page->customer;
+
+		$html = $page->html;
+
+		$tags = [];
+	    $tags['CONSULTANT_ID'] = @$customer->contact->consultant_id;
+        $tags['CONSULTANT_MSG'] = @$customer->contact->message;
+        $tags['first_name'] = @$customer->contact->first_name;
+        $tags['last_name'] = @$customer->contact->last_name;
+        $tags['COMPANY'] = @$customer->contact->company;
+        $tags['PHONE'] = @$customer->contact->phone;
+        $tags['email'] = @$customer->contact->email;
+        $tags['URL'] = @$customer->contact->url;
+        $tags['image'] = @$customer->contact->image;
+        $tags['profile_photo'] = @$customer->user->getProfileImageUrl();
+
+		foreach ($tags as $tag => $value) {
+            $html = str_replace('{'.$tag.'}', $value ?? '#', $html);
+        }
+
 		return response()->json([
 			'blockscss'           =>$blockscss, 
 			'css'                 => $page->css,
-			'html'                =>$page->html,
+			'html'                => "$html",
 			'fontCurrently'       =>  $fontCurrently,
 			'custom_header'       => $page->custom_header,
 			'custom_footer'       => $page->custom_footer,

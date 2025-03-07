@@ -63,17 +63,19 @@ class HomeController extends Controller
 
         }else{
 
-            // check domain customize landing page
-            $page= LandingPage::where('custom_domain', $domain)->orWhere('sub_domain', $domain)->publish()->firstOrFail();
-            if(empty($page->custom_url)){
+            $user = \Acelle\Model\User::where('url',$domain)->first();
 
-                $user = $page->user;
+            if(!empty($user)){
+                
+                $page= LandingPage::where('admin',1)->publish()->firstOrFail();
+                    
+                $customer = $user->customer;
 
-                if(!$user->hasPermission('landing_pages.full_access')){
+                if(!$customer->user->hasPermission('landing_pages.full_access')){
                     abort(404);
                 }
 
-                $subscription = $user->customer->getCurrentActiveSubscription();
+                $subscription = $customer->getCurrentActiveSubscription();
 
                 if(empty($subscription)){
                     abort(404);
@@ -85,6 +87,34 @@ class HomeController extends Controller
                 $thankYouURL        = getLandingPageCurrentURL($page)."/thank-you";
 
                 return view('landingpage::landingpages.publish_page', compact('page','jsonPageRoute','thankYouURL','blockscss','check_remove_brand'));
+                
+
+            }else{
+
+                // check domain customize landing page
+                $page= LandingPage::where('custom_domain', $domain)->orWhere('sub_domain', $domain)->publish()->firstOrFail();
+                if(empty($page->custom_url)){
+                    
+                    $customer = $page->customer;
+
+                    if(!$customer->user->hasPermission('landing_pages.full_access')){
+                        abort(404);
+                    }
+
+                    $subscription = $customer->getCurrentActiveSubscription();
+
+                    if(empty($subscription)){
+                        abort(404);
+                    }
+
+                    $blockscss          = replaceVarContentStyle(config('app.blockscss'));
+                    $check_remove_brand = 1;
+                    $jsonPageRoute      = route("getPageJson", ["code"=>$page->code]);
+                    $thankYouURL        = getLandingPageCurrentURL($page)."/thank-you";
+
+                    return view('landingpage::landingpages.publish_page', compact('page','jsonPageRoute','thankYouURL','blockscss','check_remove_brand'));
+                }
+            
             }
 
         }

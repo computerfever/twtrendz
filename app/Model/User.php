@@ -97,6 +97,10 @@ class User extends Authenticatable
         return $this->belongsTo('Acelle\Model\Customer');
     }
 
+    public function customerLandingPageUrl(){
+        return explode("@", $this->email)[0].".".getAppDomain();
+    }
+
     public function admin()
     {
         return $this->hasOne('Acelle\Model\Admin');

@@ -105,6 +105,16 @@
         <form id="" action="{{route('landingpages.save')}}" method="post" enctype='multipart/form-data'>
           @csrf
           <div class="modal-body p-3">
+          	@can("admin_access", Auth::user())
+          	<div class="form-group mb-3">
+          		<label for="name" class="col-form-label">@lang('Type'):</label>
+          		<select name="type" class="form-select" id="type" required>
+          			<option value="">Select Type</option>
+          			<option value="admin">For All Customers</option>
+          			<option value="customer">For Yourself</option>
+          		</select>
+          	</div>
+          	@endif
             <div class="form-group">
               <input type="number" class="form-control" name="template_id" hidden="" required="" id="template_id_builder">
               <label for="name" class="col-form-label">@lang('Name'):</label>

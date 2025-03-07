@@ -131,7 +131,7 @@
 											<tr>
 												<td>A</td>
 												<td>@</td>
-												<td>{{ config('app.SERVER_IP') }}</td>
+												<td>{{ env('SERVER_IP') }}</td>
 												<td>Automatic</td>
 											</tr>
 										</tbody>

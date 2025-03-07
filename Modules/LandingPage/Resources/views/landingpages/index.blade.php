@@ -28,6 +28,7 @@
 @section('content')
   <div class="row">
     <div class="col-sm-12">
+
       @if($data->count() > 0)
       <div class="card">
         <div class="table-responsive min-h-200">
@@ -65,15 +66,24 @@
                 </td>
                 <td>
                   @if($item->domain_type == 0)
-                  <a href="https://{{$item->sub_domain}}" target="_blank">{{$item->sub_domain}}</a>
+                    @if($item->admin ==1)
+                    <a href="https://{{$customerLandingPageUrl}}" target="_blank">{{$customerLandingPageUrl}}</a>
+                    @else
+                    <a href="https://{{$item->sub_domain}}" target="_blank">{{$item->sub_domain}}</a>
+                    @endif
                   @elseif($item->domain_type == 1)
                   <a href="https://{{$item->custom_domain}}">{{$item->custom_domain}}</a>
                   @endif
                 </td>
-                <td>
-                  <a href="{{route('landingpages.setting', $item->code)}}" class="btn btn-primary"><i class="fas fa-cog"></i> @lang('Setting')</a>
+                <td align="center">
+                  @if($item->user_id == Auth::user()->customer->id)
+                    <a href="{{route('landingpages.setting', $item->code)}}" class="btn btn-primary"><i class="fas fa-cog"></i> @lang('Setting')</a>
+                  @else
+                    Not Allowed To Change.
+                  @endif
                 </td>
-                <td>
+                <td align="center">
+                  @if($item->user_id == Auth::user()->customer->id)
                   <div class="dropdown no-arrow">
                     <a class="btn btn-primary" href="#" role="button" data-toggle="dropdown">
                       <i class="fas fa-ellipsis-v fa-sm fa-fw"></i> Actions
@@ -90,6 +100,9 @@
                       </form>
                     </div>
                   </div>
+                  @else
+                    Not Allowed To Change.
+                  @endif
                 </td>
               </tr>
               @endforeach

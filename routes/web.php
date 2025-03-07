@@ -375,6 +375,7 @@ Route::group(['middleware' => ['not_installed', 'auth', 'frontend', '2fa']], fun
 Route::group(['middleware' => ['not_installed', 'auth', 'frontend', 'subscription']], function () {
 
     Route::get('/', 'HomeController@index');
+    Route::get('/test', 'TestController@index');
 
 });
 
