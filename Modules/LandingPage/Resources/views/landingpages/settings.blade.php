@@ -31,8 +31,10 @@
 				<nav>
 					<div class="nav nav-tabs" id="nav-tab" role="tablist">
 						<a class="nav-item nav-link active" id="general" data-toggle="tab" href="#nav-general" role="tab" aria-controls="nav-general">@lang('General')</a>
+						@if($item->admin == 0)
 						<a class="nav-item nav-link" id="domains" data-toggle="tab" href="#nav-domains" role="tab" aria-controls="nav-domains">@lang('Domain')</a>
 						<a class="nav-item nav-link" id="nav-forms-tab" data-toggle="tab" href="#nav-forms" role="tab" aria-controls="nav-profile">@lang('Form')</a>
+						@endif
 						<a class="nav-item nav-link" id="nav-fonts-tab" data-toggle="tab" href="#nav-fonts" role="tab" aria-controls="nav-fonts">@lang('Fonts')</a>
 						<a class="nav-item nav-link" id="seo" data-toggle="tab" href="#nav-seo" role="tab" aria-controls="nav-seo">@lang('SEO')</a>
 						<a class="nav-item nav-link d-none" id="nav-payment-tab" data-toggle="tab" href="#nav-payment" role="tab" aria-controls="nav-payment">
