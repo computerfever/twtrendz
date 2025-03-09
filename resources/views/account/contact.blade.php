@@ -97,14 +97,14 @@
         <h2 class="text-semibold text-primary mt-4">{{ trans('messages.newsletter_information') }}</h2>
         <div class="row">
             <div class="col-md-12">
-                @include('helpers.form_control', ['type' => 'textarea', 'label' => trans('messages.consultant_message'), 'name' => 'message', 'value' => $contact->message, 'rules' => Acelle\Model\Contact::$rules])
+                @include('helpers.form_control', ['type' => 'textarea', 'label' => trans('messages.consultant_message'), 'name' => 'message', 'value' => $contact->message, 'rows'=>5, 'rules' => Acelle\Model\Contact::$rules])
             </div>
         </div>
         
-        <h2 class="text-semibold text-primary mt-4">{{ trans('messages.text_party_information') }}</h2>
+        <h2 class="text-semibold text-primary mt-4">{{ trans('messages.page_information') }}</h2>
         <div class="row">
             <div class="col-md-12">
-                @include('helpers.form_control', ['type' => 'textarea', 'label' => trans('messages.consultant_message'), 'name' => 'message', 'value' => $contact->message, 'rules' => Acelle\Model\Contact::$rules])
+                @include('helpers.form_control', ['type' => 'textarea', 'label' => trans('messages.page_message'), 'name' => 'page_message', 'value' => $contact->page_message, 'rows'=>5, 'rules' => Acelle\Model\Contact::$rules])
             </div>
         </div>
         

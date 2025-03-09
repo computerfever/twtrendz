@@ -95,6 +95,9 @@
 						<span href="#" class="btn btn-secondary mb-2 mr-1 text-semibold btn-xs mr-3" data-tag-name="{CONSULTANT_MSG}">
 							{CONSULTANT_MSG}
 						</span>
+						<span href="#" class="btn btn-secondary mb-2 mr-1 text-semibold btn-xs mr-3" data-tag-name="{PAGE_MSG}">
+							{PAGE_MSG}
+						</span>
 						<span href="#" class="btn btn-secondary mb-2 mr-1 text-semibold btn-xs mr-3" data-tag-name="{COMPANY}">
 							{COMPANY}
 						</span>
