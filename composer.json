@@ -9,6 +9,7 @@
         "nwidart/laravel-modules": "v5.0.0",
         "joedixon/laravel-translation": "1.1.2",
         "hisorange/browser-detect": "4.5.2",
+        "nahid/jsonq": "6.0.0",
         "acelle/cashier": "dev-master",
         "athenaevs/athenaevs-php": "dev-master",
         "aws/aws-php-sns-message-validator": "^1.1",
