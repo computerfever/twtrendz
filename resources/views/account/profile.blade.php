@@ -58,7 +58,13 @@
                 <div class="sub_section">
                     <h3 class="text-semibold text-primary mb-4">{{ trans('messages.basic_information') }}</h3>
 
+                    <div class="form-group">
+                        <label for="">{{ trans('messages.account.name') }}</label>
+                        <input type="text" name="name" value="{{ $customer->name }}" {{ Auth::user()->can('updateProfile', $customer) ? '' : 'disabled' }} class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" />
+                    </div>
+
                     @if (get_localization_config('show_last_name_first', $customer->getLanguageCode()))
+
                         <div class="row">
                             <div class="col-md-6">
                                 @include('helpers.form_control', ['type' => 'text', 'name' => 'last_name', 'value' => $user->last_name, 'rules' => $user->rules()])
@@ -68,6 +74,7 @@
                             </div>
                         </div>
                     @else 
+
                         <div class="row">
                             <div class="col-md-6">
                                 @include('helpers.form_control', ['type' => 'text', 'name' => 'first_name', 'value' => $user->first_name, 'rules' => $user->rules()])
