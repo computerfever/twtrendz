@@ -441,6 +441,13 @@ class LandingPageController extends Controller{
 			if(!strpos($request->sub_domain, $domain_main)) {
 				return back()->with('error', __('Subdomain must have ').$domain_main);
 			}
+
+			$user = \Acelle\Model\User::where('url',$request->sub_domain)->first();
+
+			if(!empty($user)){
+				return back()->with('error', __('Subdomain is already used. try another one.'));
+			}
+
 		}
 		
 		$page        = LandingPage::findOrFail($id);
