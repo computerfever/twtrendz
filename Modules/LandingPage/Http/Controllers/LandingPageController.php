@@ -488,10 +488,21 @@ class LandingPageController extends Controller{
 				break;
 		}
 
+        $tagsNames          = $request->tagsNames;
+        $fallbackVals       = $request->fallbackVals;
+
+        IF(!empty($tagsNames) AND !empty($fallbackVals)){
+            // array_combine(keys, values)
+            $tagsFallbackValues = json_encode(array_combine($tagsNames,$fallbackVals));
+        }else{
+            $tagsFallbackValues="";
+        }
+
 		$dataRequest['settings'] = [
 			"intergration" => $intergration_setting,
 			"autoresponder" => $autoresponder,
-			"fontCurrently" => $request->fontCurrently
+			"fontCurrently" => $request->fontCurrently,
+			"fallbackTags" => $tagsFallbackValues
 		];
 
 		$favicon = $request->file('favicon');

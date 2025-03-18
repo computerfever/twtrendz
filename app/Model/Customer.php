@@ -1647,6 +1647,7 @@ class Customer extends Model
 
         // fill user data
         $user->email = $email;
+        $user->url = str_replace(".","_", explode("@", $email)[0]).".".str_replace("app.", "", getAppDomain());
         $user->password = $password;
         $user->first_name = $first_name;
         $user->last_name = $last_name;

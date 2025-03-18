@@ -31,6 +31,8 @@ class ThemesController extends Controller{
 	public function getPageJson(Request $request){
 		$page = $request->page;
 
+		$fallbackTags = json_decode($page->settings->fallbackTags,true);
+
 		$blockscss = replaceVarContentStyle(config('app.blockscss'));
 		$fontCurrently = "Open Sans";
 		
@@ -47,21 +49,29 @@ class ThemesController extends Controller{
 		}
 
 		$tags = [];
-	    $tags['CONSULTANT_ID'] = @$customer->contact->consultant_id;
-        $tags['CONSULTANT_MSG'] = @$customer->contact->message;
-        $tags['PAGE_MSG'] = @$customer->contact->page_message;
-        $tags['first_name'] = @$customer->contact->first_name;
-        $tags['last_name'] = @$customer->contact->last_name;
-        $tags['COMPANY'] = @$customer->contact->company;
-        $tags['PHONE'] = @$customer->contact->phone;
-        $tags['email'] = @$customer->contact->email;
-        $tags['URL'] = @$customer->contact->url;
-        $tags['image'] = @$customer->contact->image;
-        $tags['profile_photo'] = $request->getSchemeAndHttpHost().@$customer->user->getProfileImageUrl();
-	    
+		$tags['CONSULTANT_ID'] = @$customer->contact->consultant_id;
+		$tags['CONSULTANT_MSG'] = @$customer->contact->message;
+		$tags['PAGE_MSG'] = @$customer->contact->page_message;
+		$tags['first_name'] = @$customer->contact->first_name;
+		$tags['last_name'] = @$customer->contact->last_name;
+		$tags['COMPANY'] = @$customer->contact->company;
+		$tags['PHONE'] = @$customer->contact->phone;
+		$tags['email'] = @$customer->contact->email;
+		$tags['URL'] = @$customer->contact->url;
+		$tags['image'] = @$customer->contact->image;
+		$tags['profile_photo'] = $request->getSchemeAndHttpHost().@$customer->user->getProfileImageUrl();
+
+		foreach ($tags as $key => $value) {
+			if(empty($tags[$key]) AND !empty($fallbackTags)){
+				if(array_key_exists($key,$fallbackTags)){
+					$tags[$key] = $fallbackTags[$key];
+				}
+			}
+		}
+
 		foreach ($tags as $tag => $value) {
-            $html = str_replace('{'.$tag.'}', $value ?? '#', $html);
-        }
+			$html = str_replace('{'.$tag.'}', $value ?? '', $html);
+		}
 
 		return response()->json([
 			'blockscss'           =>$blockscss, 

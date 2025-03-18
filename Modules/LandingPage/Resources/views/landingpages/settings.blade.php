@@ -31,6 +31,7 @@
 				<nav>
 					<div class="nav nav-tabs" id="nav-tab" role="tablist">
 						<a class="nav-item nav-link active" id="general" data-toggle="tab" href="#nav-general" role="tab" aria-controls="nav-general">@lang('General')</a>
+						<a class="nav-item nav-link" id="tags" data-toggle="tab" href="#nav-tags" role="tab" aria-controls="nav-tags">@lang('Fallback Tags')</a>
 						@if($item->admin == 0)
 						<a class="nav-item nav-link" id="domains" data-toggle="tab" href="#nav-domains" role="tab" aria-controls="nav-domains">@lang('Domain')</a>
 						<a class="nav-item nav-link" id="nav-forms-tab" data-toggle="tab" href="#nav-forms" role="tab" aria-controls="nav-profile">@lang('Form')</a>
@@ -67,7 +68,58 @@
 							<p><img src="{{ URL::to('/') }}/storage/pages/{{ $item->id }}/{{ $item->favicon }}" data-value="" class="img-thumbnail" /></p>
 							@endif
 						</div>
+
 					</div>
+
+					<div class="tab-pane fade" id="nav-tags" role="tabpanel" aria-labelledby="nav-tags-tab">
+
+						<h4 class="title-tab-content pb-1">@lang('Tags Fallback Values')</h4>
+
+						<p>The Fallback feature allows you to insert a substitute or alternate value if the data is not available in your subscriber list. Ex: SUBSCRIBER_FIRST_NAME if not available, you could use a substitute. Something like Hello fellow space traveler, if there is no first name in the first name field in the subscriber's record.</p>
+
+						<div class="table-responsive">
+							<table id="tagsFallbackValues" class="table">
+								<thead>
+									<tr>
+										<th>Tag</th>
+										<th>FallBack Text Value</th>
+										<th>Delete</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php if(!empty($item->settings->fallbackTags)){ ?>
+									<?php foreach(json_decode($item->settings->fallbackTags) as $key => $value){ ?>
+									<tr>
+										<td>
+											<input name="tagsNames[]" type="text" placeholder="first_name" class="form-control" value="{{$key}}" list="tagsNames">
+										</td>
+										<td>
+											<input name="fallbackVals[]" type="text" placeholder="Steve" class="form-control" value="{{$value}}">
+										</td>
+										<td class="mt-10">
+											<button class="btn btn-danger btn-sm rounded btnDelete"><i class="fa fa-trash"></i> Delete</button>
+										</td>
+									</tr>
+									<?php }} ?>
+								</tbody>
+								<datalist id="tagsNames">
+									@if (count( Modules\LandingPage\Entities\LandingPage::tags()) > 0)
+										@foreach( Modules\LandingPage\Entities\LandingPage::tags() as $tag)
+											<option value="{{ $tag["name"] }}">
+										@endforeach
+									@endif
+									<option value="">
+								</datalist>
+							</table>
+						</div>
+						<button onclick="addTagsFallbackValues();" class="btn btn-success" type="button">
+							<i class="fa fa-plus"></i> Add Tag FallBack Value
+						</button>
+
+						<div class="clearfix mb-4"></div>
+
+					</div>
+
 					{{-- Domains --}}
 					<div class="tab-pane fade" id="nav-domains" role="tabpanel" aria-labelledby="nav-domains-tab">
 						<h4 class="title-tab-content">@lang('Domain Settings')</h4>
@@ -387,6 +439,34 @@
 	</form>
 	@push('scripts')
 	<script type="text/javascript">
+
+		function addTagsFallbackValues() {
+		  html = `
+		  <tr>
+				<td>
+					<input name='tagsNames[]' type='text' placeholder='first_name' class='form-control' value='' list='tagsNames'>
+				</td>
+				<td>
+					<input name='fallbackVals[]' type='text' placeholder='Steve' class='form-control' value=''>
+				</td>
+				<td class='mt-10'>
+					<button class='btn btn-danger btn-sm rounded btnDelete'><i class='fa fa-trash'></i> Delete</button>
+				</td>
+			</tr>`;
+		  $('#tagsFallbackValues tbody').append(html);
+		}
+
+		$(document).on('click', '.btnDelete', function () {
+		  $(this).closest('tr').remove();
+		});
+
+		$(document).on('keydown', '#updateTagsFallbackValuesForm input', function (e) {
+			if(e.keyCode == 13) {
+				e.preventDefault();
+				return false;
+			}
+		});
+
 		var item_intergration     = @json($item_intergration);
 		var url_load_list         = `{{ url('intergration/lists') }}`;
 		var url_load_merge_fields = `{{ url('intergration/mergefields') }}`;

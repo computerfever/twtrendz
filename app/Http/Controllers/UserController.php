@@ -169,11 +169,17 @@ class UserController extends Controller
                 ]);
             }
 
+
+            // Customer Contact
+            $customerContact = \Acelle\Model\Contact::create(['first_name' => $request->first_name,'last_name' => $request->last_name,'company' => $request->name, 'email' => $request->email]);
+            $customer->contact_id = $customerContact->id;
+            $customer->save();
+
             // Generate info
             $list = $customer->newMailList();
 
             // Save contact
-            $contact = \Acelle\Model\Contact::create(['company' => '', 'phone' => '', 'email' => $request->email, 'zip' => '', '' => '', 'city' => '', 'address_1' => '', 'address_2' => NULL, 'country_id' => NULL, 'url' => '']);
+            $contact = \Acelle\Model\Contact::create(['first_name' => $request->first_name,'last_name' => $request->last_name,'company' => $request->name, 'email' => $request->email]);
             $list->fill(['name' => 'Newsletter','from_name' => $request->name,'from_email' => $request->email]);
             $list->customer_id = $customer->id;
             $list->contact_id = $contact->id;

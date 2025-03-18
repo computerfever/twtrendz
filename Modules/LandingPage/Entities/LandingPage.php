@@ -17,13 +17,10 @@ class LandingPage extends Model
 		$this->code = (string)Uuid::uuid1();
 	}
 
-	
-
 	protected $dates = [
 		'created_at',
 		'updated_at',
 	];
-
 
 	protected $fillable = [
 		'user_id',
@@ -65,13 +62,30 @@ class LandingPage extends Model
 		'updated_at',
 	];
 	
-
 	protected $casts = [
 		'settings' => 'object',
 		'domain_type' => 'boolean',
 		'is_publish' => 'boolean',
 		'is_trash' => 'boolean',
 	];
+
+	public static function tags($list = null){
+
+        $tags = [
+            ['name' => 'first_name', 'required' => false],
+            ['name' => 'last_name', 'required' => false],
+            ['name' => 'CONSULTANT_ID', 'required' => false],
+            ['name' => 'CONSULTANT_MSG', 'required' => false],
+            ['name' => 'PAGE_MSG', 'required' => false],
+            ['name' => 'COMPANY', 'required' => false],
+            ['name' => 'PHONE', 'required' => false],
+            ['name' => 'email', 'required' => false],
+            ['name' => 'URL', 'required' => false],
+            ['name' => 'profile_photo', 'required' => false]
+        ];
+
+        return $tags;
+    }
 
 	public function user()
 	{
