@@ -194,11 +194,11 @@ class ClickLog extends Model
 
             $customer_id = $request->user()->customer->id;
 
-            $query = $query->where('tracking_logs.campaign_id', '=', $campaign->id);
-            
             if($campaign->admin == 1 AND $campaign->customer_id != $customer_id){
                 $query->join('mail_lists', 'mail_lists.id', '=', 'subscribers.mail_list_id')->where('mail_lists.customer_id', '=', $customer_id);
             }
+
+            $query = $query->where('tracking_logs.campaign_id', '=', $campaign->id);
 
         }
 
