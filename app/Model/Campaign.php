@@ -622,7 +622,11 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
     public function deliveredCount()
     {
 
-        $customer_id = Auth::user()->customer->id;
+        if (Auth::user()) {
+            $customer_id = Auth::user()->customer->id;
+        }else{
+            $customer_id = NULL;
+        }
         
         if($this->customer_id == $customer_id){
 
@@ -645,7 +649,11 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
     public function failedCount()
     {
 
-        $customer_id = Auth::user()->customer->id;
+        if (Auth::user()) {
+            $customer_id = Auth::user()->customer->id;
+        }else{
+            $customer_id = NULL;
+        }
         
         if($this->customer_id == $customer_id){
             return $this->trackingLogs()->failed()->count();
@@ -722,7 +730,11 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
     public function clickCount($start = null, $end = null)
     {
 
-        $customer_id = Auth::user()->customer->id;
+        if (Auth::user()) {
+            $customer_id = Auth::user()->customer->id;
+        }else{
+            $customer_id = NULL;
+        }
 
         $query = $this->clickLogs();
     
@@ -797,7 +809,11 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
     public function uniqueOpenCount()
     {
 
-        $customer_id = Auth::user()->customer->id;
+        if (Auth::user()) {
+            $customer_id = Auth::user()->customer->id;
+        }else{
+            $customer_id = NULL;
+        }
 
         if($this->customer_id == $customer_id){
             return $this->openLogs()->distinct('tracking_logs.subscriber_id')->count();
@@ -824,7 +840,11 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
     public function openUniqCount($start = null, $end = null)
     {
 
-        $customer_id = Auth::user()->customer->id;
+        if (Auth::user()) {
+            $customer_id = Auth::user()->customer->id;
+        }else{
+            $customer_id = NULL;
+        }
 
         $query = $this->openLogs();
 
@@ -876,7 +896,11 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
     public function feedbackCount()
     {
 
-        $customer_id = Auth::user()->customer->id;
+        if (Auth::user()) {
+            $customer_id = Auth::user()->customer->id;
+        }else{
+            $customer_id = NULL;
+        }
 
         if($this->customer_id == $customer_id){
             return $this->feedbackLogs()->distinct('subscriber_id')->count('subscriber_id');
@@ -905,7 +929,11 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
     public function bounceCount()
     {
 
-        $customer_id = Auth::user()->customer->id;
+        if (Auth::user()) {
+            $customer_id = Auth::user()->customer->id;
+        }else{
+            $customer_id = NULL;
+        }
 
         if($this->customer_id == $customer_id){
             return $this->bounceLogs()->distinct('subscriber_id')->count('subscriber_id');
@@ -938,7 +966,11 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
      */
     public function unsubscribeCount()
     {
-        $customer_id = Auth::user()->customer->id;
+        if (Auth::user()) {
+            $customer_id = Auth::user()->customer->id;
+        }else{
+            $customer_id = NULL;
+        }
 
         if($this->customer_id == $customer_id){
             return $this->unsubscribeLogs()->distinct('unsubscribe_logs.subscriber_id')->count();
@@ -1074,10 +1106,26 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
      */
     public function getTopLinks($number = 5)
     {
-        $records = $this->clickLogs()
+        if (Auth::user()) {
+            $customer_id = Auth::user()->customer->id;
+        }else{
+            $customer_id = NULL;
+        }
+
+        if($this->customer_id == $customer_id){
+
+            $records = $this->clickLogs()
             ->select('click_logs.url')
             ->addSelect(DB::raw('count(*) as aggregate'))
             ->groupBy('click_logs.url');
+
+        }else{
+
+            $records = $this->clickLogs()->select('click_logs.url')->join('subscribers', 'subscribers.id', '=', 'tracking_logs.subscriber_id')->join('mail_lists', 'mail_lists.id', '=', 'subscribers.mail_list_id')->where('mail_lists.customer_id', '=', $customer_id)
+            ->addSelect(DB::raw('count(*) as aggregate'))
+            ->groupBy('click_logs.url');
+
+        }
 
         return $records->take($number);
     }
