@@ -1202,6 +1202,15 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
      */
     public function topOpenCountries($number = 5)
     {
+
+        if (Auth::user()) {
+            $customer_id = Auth::user()->customer->id;
+        }else{
+            $customer_id = NULL;
+        }
+
+        if($this->customer_id == $customer_id){
+
         $records = IpLocation::select('ip_locations.country_name', 'ip_locations.country_code')
             ->addSelect(DB::raw('count(*) as aggregate'))
             ->join('open_logs', 'open_logs.ip_address', '=', 'ip_locations.ip_address')
@@ -1212,6 +1221,33 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
             ->groupBy('ip_locations.country_name', 'ip_locations.country_code')
             ->orderBy('aggregate', 'desc')
             ->take($number);
+
+        }else{
+
+        $records = IpLocation::select('ip_locations.country_name', 'ip_locations.country_code')
+            ->addSelect(DB::raw('count(*) as aggregate'))
+            ->join('open_logs', 'open_logs.ip_address', '=', 'ip_locations.ip_address')
+            ->join('tracking_logs', 'open_logs.message_id', '=', 'tracking_logs.message_id')
+            ->where('tracking_logs.campaign_id', '=', $this->id)
+            ->join('campaigns', 'tracking_logs.campaign_id', '=', 'campaigns.id')
+            ->where('campaigns.customer_id', '=', $this->customer->id)
+            ->groupBy('ip_locations.country_name', 'ip_locations.country_code')
+            ->orderBy('aggregate', 'desc')
+            ->take($number);$records = IpLocation::select('ip_locations.country_name', 'ip_locations.country_code')
+            ->addSelect(DB::raw('count(*) as aggregate'))
+            ->join('open_logs', 'open_logs.ip_address', '=', 'ip_locations.ip_address')
+            ->join('tracking_logs', 'open_logs.message_id', '=', 'tracking_logs.message_id')
+            ->where('tracking_logs.campaign_id', '=', $this->id)
+            ->join('campaigns', 'tracking_logs.campaign_id', '=', 'campaigns.id')
+            ->where('campaigns.customer_id', '=', $this->customer->id)
+            ->join('subscribers', 'subscribers.id', '=', 'tracking_logs.subscriber_id')
+            ->join('mail_lists', 'mail_lists.id', '=', 'subscribers.mail_list_id')
+            ->where('mail_lists.customer_id', '=', $customer_id)
+            ->groupBy('ip_locations.country_name', 'ip_locations.country_code')
+            ->orderBy('aggregate', 'desc')
+            ->take($number);
+
+        }
 
         return $records;
     }
