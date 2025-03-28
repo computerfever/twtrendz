@@ -16,7 +16,8 @@
         'menu' => 'links',
     ])
 
-    <h3 class="mt-10"><span class="text-teal text-semibold">{{ count($campaign->getLinks()) }}</span> {{ trans('messages.links') }}</h3>
+    {{-- <h3 class="mt-10"><span class="text-teal text-semibold">{{ count($campaign->getLinks()) }}</span> {{ trans('messages.links') }}</h3> --}}
+    <h3 class="mt-10"><span class="text-teal text-semibold">{{ count($links) }}</span> {{ trans('messages.links') }}</h3>
     
     <table class="table table-box pml-table table-head">
         <tr>
