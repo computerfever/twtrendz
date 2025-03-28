@@ -806,20 +806,34 @@ class CampaignController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function links(Request $request)
-    {
+    {           
         $campaign = Campaign::findByUid($request->uid);
+
+        $customer = $request->user()->customer;
 
         // authorize
         if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
             return $this->notAuthorized();
         }
+        if($customer->id == $campaign->customer_id){
 
-        $links = $campaign->clickLogs()
+            $links = $campaign->clickLogs()
                           ->select(
                               'click_logs.url',
                               DB::raw('count(*) AS clickCount'),
                               DB::raw(sprintf('max(%s) AS lastClick', table('click_logs.created_at')))
                           )->groupBy('click_logs.url')->get();
+
+        }else{
+            $links = $campaign->clickLogs()
+                    ->join('subscribers', 'subscribers.id', '=', 'tracking_logs.subscriber_id')
+                    ->join('mail_lists', 'mail_lists.id', '=', 'subscribers.mail_list_id')->where('mail_lists.customer_id', '=', $customer->id)
+                    ->select(
+                        'click_logs.url',
+                        DB::raw('count(*) AS clickCount'),
+                        DB::raw(sprintf('max(%s) AS lastClick', table('click_logs.created_at')))
+                    )->groupBy('click_logs.url')->get();
+        }
 
         // authorize
         if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {
