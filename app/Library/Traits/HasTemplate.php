@@ -244,7 +244,7 @@ trait HasTemplate
             $message->setReplyTo($server->default_from_email);
         } else {
             $message->setFrom(array($this->from_email => $this->from_name));
-            if($this->admin == 1){
+            if($this->admin == 1 AND !empty($subscriber->mailList)){
                 $subscriberUser = $subscriber->mailList->customer->user;
                 $message->setReplyTo($subscriberUser->email);
             }else{
