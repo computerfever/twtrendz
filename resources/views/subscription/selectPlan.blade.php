@@ -23,7 +23,9 @@
     <div class="container mt-4 mb-5">
         <div class="row">
             <div class="col-md-10">
+                
                 <h2 class="mb-4">{{ trans('messages.subscription.choose_a_plan') }}</h2>
+
                 @if ($getLastCancelledOrEndedGeneralSubscription)
                     @include('elements._notification', [
                         'level' => 'warning',
@@ -38,6 +40,16 @@
                     'level' => 'warning',
                     'message' => trans('messages.no_plan.title')
                 ])
+
+                @if(empty(Auth::user()->customer->contact->first_name) or empty(Auth::user()->customer->contact->last_name) or empty(Auth::user()->customer->contact->company) or empty(Auth::user()->customer->contact->email) or empty(Auth::user()->customer->contact->address_1) or empty(Auth::user()->customer->contact->country_id) or empty(Auth::user()->customer->contact->url))
+                    @include('elements._notification', [
+                        'level' => 'danger',
+                        'message' => trans('messages.complete_profile', [
+                            'link' => action('AccountController@contact'),
+                        ])
+
+                    ])
+                @endif
     
                 <p>{{ trans('messages.select_plan.wording') }}</p>
                 

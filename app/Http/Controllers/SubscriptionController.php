@@ -80,6 +80,10 @@ class SubscriptionController extends Controller
         $customer = $request->user()->customer;
         $plan = PlanGeneral::findByUid($request->plan_uid);
 
+        if(empty($customer->contact->first_name) or empty($customer->contact->last_name) or empty($customer->contact->company) or empty($customer->contact->email) or empty($customer->contact->address_1) or empty($customer->contact->country_id) or empty($customer->contact->url)){
+            return redirect()->action('AccountController@contact');
+        }
+
         // already has subscription
         if ($customer->getCurrentActiveGeneralSubscription()) {
             throw new \Exception('Customer already has active subscription!');
@@ -125,6 +129,10 @@ class SubscriptionController extends Controller
         $customer = $request->user()->customer;
         $invoice = $customer->invoices()->where('uid', '=', $request->invoice_uid)->first();
         $billingAddress = $customer->getDefaultBillingAddress();
+
+        if(empty($customer->contact->first_name) or empty($customer->contact->last_name) or empty($customer->contact->company) or empty($customer->contact->email) or empty($customer->contact->address_1) or empty($customer->contact->country_id) or empty($customer->contact->url)){
+            return redirect()->action('AccountController@contact');
+        }
 
         // can not found the invoice
         if (!$invoice) {

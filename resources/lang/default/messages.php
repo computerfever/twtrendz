@@ -1953,6 +1953,7 @@
   'no_action_notifications' => 'No notification',
   'no_activity_logs' => 'You haven\'t had any activities recently',
   'no_more_item' => 'You have exceeded the service quota',
+  'complete_profile' => 'Please Complete Your Profile Before Buying Subscription. <a href=":link">Click Here To Complete</a>',
   'no_plan' => 'No plan yet!',
   'no_plan.title' => 'You are not subscribed to any plan!',
   'no_primary_payment' => 'No Payment Gateway selected. Please go to Admin / Setting / Payment Gateways to select one',

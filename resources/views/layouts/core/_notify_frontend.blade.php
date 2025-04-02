@@ -23,6 +23,16 @@
         });
     @endif
 
+    @if(empty(Auth::user()->customer->contact->first_name) or empty(Auth::user()->customer->contact->last_name) or empty(Auth::user()->customer->contact->company) or empty(Auth::user()->customer->contact->email) or empty(Auth::user()->customer->contact->address_1) or empty(Auth::user()->customer->contact->country_id) or empty(Auth::user()->customer->contact->url))
+        notify({
+            type: 'warning',
+            message:  `{!! trans('messages.complete_profile', [
+                'link' => action('AccountController@contact'),
+            ]) !!}`,
+            timeout: false,
+        });
+    @endif
+
     @if (\Auth::user()->customer &&
         config('app.saas') &&
         !\Auth::user()->customer->getCurrentActiveGeneralSubscription() &&

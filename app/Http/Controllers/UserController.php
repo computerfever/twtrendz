@@ -185,6 +185,24 @@ class UserController extends Controller
             $list->contact_id = $contact->id;
             $list->save();
 
+
+            $customersList = \Acelle\Model\MailList::where(['name'=>'Customers Emails','customer_id'=>1])->first();
+            if(!empty($customersList)){
+	            $subscriber = new \Acelle\Model\Subscriber();
+
+	            $subscriber->mail_list_id = $customersList->id;
+
+	            $subscriber->email = $user->email;
+
+	            $subscriber->custom_100 = $user->email;
+	            $subscriber->custom_101 = $user->first_name;
+	            $subscriber->custom_102 = $user->last_name;
+
+	            $subscriber->status = 'subscribed';
+
+	            $subscriber->save();
+	        }
+	        
             // user email verification
             if (true) {
                 // Send registration confirmation email
