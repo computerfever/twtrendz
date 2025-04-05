@@ -34,6 +34,10 @@ class BounceLog extends Model
     public const SOFT = 'soft';
     public const UNKNOWN = 'unknown';
 
+    protected $casts = [
+        'raw' => 'object',
+    ];
+
     /**
      * Associations.
      *

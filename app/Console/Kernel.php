@@ -143,7 +143,8 @@ class Kernel extends ConsoleKernel
         // + import
         //
         if (!config('custom.distributed_worker')) {
-            $schedule->command('queue:work --queue=import,default,high,batch,single --tries=1 --max-time=180')->everyMinute();
+            // $schedule->command('queue:work --queue=import,default,high,batch,single --tries=1 --max-time=180')->everyMinute();
+            $schedule->command('queue:work --queue=import,default,high,batch,single,automation-dispatch,automation --tries=1 --max-time=180')->everyMinute();
         }
     }
 

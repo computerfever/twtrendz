@@ -2264,8 +2264,8 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
             function ($join) {
                 $join->on('tracking_logs.subscriber_id', 'subscribers.id');
             }
-        )->leftJoin('bounce_logs', 'tracking_logs.id', 'bounce_logs.tracking_log_id')
-         ->leftJoin('feedback_logs', 'tracking_logs.id', 'feedback_logs.tracking_log_id')
+        )->leftJoin('bounce_logs', 'tracking_logs.message_id', 'bounce_logs.message_id')
+         ->leftJoin('feedback_logs', 'tracking_logs.message_id', 'feedback_logs.message_id')
          ->leftJoin('unsubscribe_logs', 'tracking_logs.message_id', 'unsubscribe_logs.message_id');
 
         $query->select(DB::raw(strtr("

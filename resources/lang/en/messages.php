@@ -2363,6 +2363,7 @@
   'rate.send' => 'Send',
   'rate_limit.speed' => 'Rate limit :limit',
   'raw' => 'Raw',
+  'failed_reason' => 'Failed Reason',
   'raw_feedback_content' => 'Raw content',
   'read' => 'Read',
   'recaptcha' => 'reCaptcha',

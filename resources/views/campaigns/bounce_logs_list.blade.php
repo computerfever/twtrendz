@@ -6,6 +6,7 @@
             <th>{{ trans('messages.recipient') }}</th>
             <th>{{ trans('messages.bounce_type') }}</th>
             <!-- <th>{{ trans('messages.raw') }}</th> -->
+            <th>{{ trans('messages.failed_reason') }}</th>
             <th>{{ trans('messages.campaign') }}</th>
             <th>{{ trans('messages.sending_server') }}</th>
             <th>{{ trans('messages.created_at') }}</th>
@@ -20,12 +21,31 @@
                     <span class="xtooltip tooltipstered no-margin kq_search" title="{{ trans('messages.raw') }}">{{ $item->bounce_type }}</span>
                     <span class="xtooltip tooltipstered text-muted second-line-mobile" title="{{ trans('messages.raw') }}">{{ trans('messages.bounce_type') }}</span>
                 </td>
-                <!--
-                <td>
+                
+                {{-- <td>
                     <span class="no-margin kq_search">{{ $item->raw }}</span>
                     <span class="text-muted second-line-mobile">{{ trans('messages.raw') }}</span>
+                </td> --}}
+
+                <td>
+                    <div class="tooltip_templates" style="display:none;">
+                        <pre id="tooltip_content{{$key}}" class="mb-0">
+                            <?php print_r($item->raw); ?>
+                        </pre>
+                    </div>
+                    
+                    <span class="no-margin kq_search xtooltip" data-tooltip-content="#tooltip_content{{$key}}">
+                        @if($item->trackingLog->getSendingServer())
+                            {{-- <pre>
+                                {{ print_r($item->raw) }}
+                            </pre> --}}
+                            {{@$item->raw->category}}
+                            {{@$item->raw->bounce_classification}}
+                        @endif
+                    </span>
+                    <span class="text-muted second-line-mobile">{{ trans('messages.raw') }}</span>
                 </td>
-                -->
+                
                 <td>
                     <span class="no-margin kq_search">{{ is_null($item->trackingLog->campaign) ? 'N/A' : $item->trackingLog->campaign->name }}</span>
                     <span class="text-muted second-line-mobile">{{ trans('messages.campaign') }}</span>

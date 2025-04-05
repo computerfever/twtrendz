@@ -3,6 +3,12 @@
         current-page="{{ empty(request()->page) ? 1 : empty(request()->page) }}"
     >
         @foreach ($subscribers as $key => $subscriber)
+
+            <?php 
+
+            $bounced_message = json_decode($subscriber->bounced_message);
+
+            ?>
             <tr class="position-relative">
                 <td width="1%" class="list-check-col">
                     <div class="text-nowrap">
@@ -20,17 +26,28 @@
                     <div class="no-margin text-bold">
                         <a class="kq_search" href="{{ action('SubscriberController@edit', ['list_uid' => $list->uid ,'id' => $subscriber->id]) }}">
                             {{ $subscriber->email }}
-                            <span class="label label-flat bg-{{ $subscriber->status }}">{{ trans('messages.' . $subscriber->status) }}</span>
+                            
+                            @if(!empty($bounced_message))
+                                <span class="label label-flat bg-danger">
+                                    {{@$bounced_message->category}}
+                                    {{@$bounced_message->bounce_classification}}
+                                </span>
+                            @else
+                                <span class="label label-flat bg-{{ $subscriber->status }}">{{ trans('messages.' . $subscriber->status) }}</span>
+                            @endif
+
                             <span class="label label-flat bg-{{ $subscriber->verification_status }}">{{ trans('messages.email_verification_result_' . $subscriber->verification_status) }}</span>
                         </a>
                         <br />
-                        <span data-popup="tooltip" title="{{ 
+                        <span data-popup="tooltip" title2="{{ 
                             $subscriber->bounced_message ?:
                             $subscriber->feedback_message ?:
                             $subscriber->failed_message ?:
                             $subscriber->skipped_message ?:
                             $subscriber->new_message
-                        }}" class="label label-flat bg-{{ $subscriber->delivery_status }} kq_search">{{ trans('messages.tracking_log_status_' . $subscriber->delivery_status) }}
+                        }}" class="label label-flat bg-{{ $subscriber->delivery_status }} kq_search">
+                        {{-- {{$subscriber->delivery_status}} --}}
+                        {{ trans('messages.tracking_log_status_' . $subscriber->delivery_status) }}
                         </span>
                     </div>
                 </td>

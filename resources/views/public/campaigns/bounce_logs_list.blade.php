@@ -20,12 +20,12 @@
                     <span class="xtooltip tooltipstered no-margin kq_search" title="{{ trans('messages.raw') }}">{{ $item->bounce_type }}</span>
                     <span class="xtooltip tooltipstered text-muted second-line-mobile" title="{{ trans('messages.raw') }}">{{ trans('messages.bounce_type') }}</span>
                 </td>
-                <!--
-                <td>
+
+                {{-- <td>
                     <span class="no-margin kq_search">{{ $item->raw }}</span>
                     <span class="text-muted second-line-mobile">{{ trans('messages.raw') }}</span>
-                </td>
-                -->
+                </td> --}}
+                
                 <td>
                     <span class="no-margin kq_search">{{ is_null($item->trackingLog->campaign) ? 'N/A' : $item->trackingLog->campaign->name }}</span>
                     <span class="text-muted second-line-mobile">{{ trans('messages.campaign') }}</span>

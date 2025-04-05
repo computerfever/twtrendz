@@ -21,7 +21,13 @@
                 <span class="text-muted second-line-mobile">{{ trans('messages.feedback_type') }}</span>
             </td>
             <td>
-                <span class="no-margin kq_search">{{ $item->raw_feedback_content }}</span>
+                <div class="tooltip_templates" style="display:none;">
+                    <pre id="tooltip_content{{$key}}" class="mb-0">
+                        <?php print_r(json_decode($item->raw_feedback_content)); ?>
+                    </pre>
+                </div>
+
+                <span class="no-margin kq_search xtooltip" data-tooltip-content="#tooltip_content{{$key}}"><?php print_r(json_decode($item->raw_feedback_content)); ?></span>
                 <span class="text-muted second-line-mobile">{{ trans('messages.raw_feedback_content') }}</span>
             </td>
             <td>
