@@ -132,7 +132,7 @@ class BounceLog extends Model
 
         // SendGrid only notifies in case of HARD bounce
         $bounceLog->bounce_type = self::HARD;
-        $bounceLog->raw = json_decode($raw); // notice that {$raw} might contain more than one events
+        $bounceLog->raw = json_decode($raw, true); // notice that {$raw} might contain more than one events
         $bounceLog->save();
 
         // add subscriber's email to blacklist
