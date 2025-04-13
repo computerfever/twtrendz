@@ -16,22 +16,18 @@ class TestController extends Controller
      */
     public function index(Request $request){
 
-        $logs = \Acelle\Model\BounceLog::where('raw', 'like', '"{%')->get();
+        // $logs = \Acelle\Model\BounceLog::where('raw', 'like', '"{%')->get();
 
-        foreach ($logs as $log) {
+        // foreach ($logs as $log) {
 
-            // $log->raw = str_replace(["\\"], "", $log->raw);
-            // $log->raw = str_replace(['"{','}"'], ['{','}'], $log->raw);
+        //     // $log->raw = str_replace(["\\"], "", $log->raw);
+        //     // $log->raw = str_replace(['"{','}"'], ['{','}'], $log->raw);
 
-            $raw = json_decode($log->raw);
+        //     $raw = json_decode($log->raw,true);
+        //     $log->raw = $raw;
+        //     $log->save();
 
-            $log->raw = $raw;
-
-            $log->save();
-
-            // print_r($raw);
-
-        }
+        // }
 
         // $customersList = \Acelle\Model\MailList::where(['name'=>'Customers Emails','customer_id'=>1])->first();
 

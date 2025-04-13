@@ -24,7 +24,11 @@
                 </td>
                 <td>
                     <div class="no-margin text-bold">
+                        @if (\Gate::allows('update', $subscriber))
                         <a class="kq_search" href="{{ action('SubscriberController@edit', ['list_uid' => $list->uid ,'id' => $subscriber->id]) }}">
+                        @else
+                        <a class="kq_search" href="#">
+                        @endif
                             {{ $subscriber->email }}
                             
                             @if(!empty($bounced_message))
