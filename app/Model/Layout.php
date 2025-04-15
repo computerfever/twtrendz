@@ -128,6 +128,14 @@ class Layout extends Model
         }
 
         $tags = array_merge($tags, [
+            ['name' => '{first_name}', 'required' => false],
+            ['name' => '{last_name}', 'required' => false],
+            ['name' => '{email}', 'required' => false],
+            ['name' => '{URL}', 'required' => false],
+            ['name' => '{CONSULTANT_ID}', 'required' => false],
+            ['name' => '{PHONE}', 'required' => false],
+            ['name' => '{profile_photo}', 'required' => false],
+
             ['name' => '{LIST_NAME}', 'required' => false],
             ['name' => '{CONTACT_NAME}', 'required' => false],
             ['name' => '{CONTACT_STATE}', 'required' => false],

@@ -84,6 +84,15 @@ class Page extends Model
     public function renderContent($values = null, $subscriber = null, $messageId = null)
     {
         $this->content = str_replace('{LIST_NAME}', $this->mailList->name, $this->content);
+
+        $this->content = str_replace('{first_name}', $this->mailList->customer->contact->first_name, $this->content);
+        $this->content = str_replace('{last_name}', $this->mailList->customer->contact->last_name, $this->content);
+        $this->content = str_replace('{PHONE}', $this->mailList->customer->contact->phone, $this->content);
+        $this->content = str_replace('{email}', $this->mailList->customer->contact->email, $this->content);
+        $this->content = str_replace('{URL}', $this->mailList->customer->contact->url, $this->content);
+        $this->content = str_replace('{CONSULTANT_ID}', $this->mailList->customer->contact->consultant_id, $this->content);
+        $this->content = str_replace('{profile_photo}', $this->mailList->customer->user->getProfileImageUrl(), $this->content);
+
         /*
         // BAISC INFz
         $this->content = str_replace('{CONTACT_NAME}', $this->mailList->contact->company, $this->content);
