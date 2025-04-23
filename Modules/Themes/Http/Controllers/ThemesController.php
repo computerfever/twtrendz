@@ -59,7 +59,12 @@ class ThemesController extends Controller{
 		$tags['email'] = @$customer->contact->email;
 		$tags['URL'] = @$customer->contact->url;
 		$tags['image'] = @$customer->contact->image;
-		$tags['profile_photo'] = $request->getSchemeAndHttpHost().@$customer->user->getProfileImageUrl();
+		
+		if (str_contains($customer->user->getProfileImageUrl(), 'http')) {
+			$tags['profile_photo'] = $customer->user->getProfileImageUrl();
+		}else{
+			$tags['profile_photo'] = $request->getSchemeAndHttpHost().@$customer->user->getProfileImageUrl();
+		}
 
 		foreach ($tags as $key => $value) {
 			if(empty($tags[$key]) AND !empty($fallbackTags)){
