@@ -91,7 +91,10 @@
                 @include('helpers.form_control', ['type' => 'text', 'label' => trans('messages.consultant_id'), 'name' => 'consultant_id', 'value' => $contact->consultant_id, 'rules' => Acelle\Model\Contact::$rules])
             </div>
             <div class="col-md-12">
-                @include('helpers.form_control', ['type' => 'textarea', 'label' => trans('messages.consultant_message'), 'name' => 'message', 'value' => $contact->message, 'rules' => Acelle\Model\Contact::$rules])
+                @include('helpers.form_control', ['type' => 'textarea', 'label' => trans('messages.consultant_message'), 'name' => 'message', 'value' => $contact->message, 'rows'=>5, 'rules' => Acelle\Model\Contact::$rules])
+            </div>
+            <div class="col-md-12">
+                @include('helpers.form_control', ['type' => 'textarea', 'label' => trans('messages.page_message'), 'name' => 'page_message', 'value' => $contact->page_message, 'rows'=>5, 'rules' => Acelle\Model\Contact::$rules])
             </div>
         </div>
 

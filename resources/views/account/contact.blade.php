@@ -94,7 +94,7 @@
             
         </div>
         
-        <h2 class="text-semibold text-primary mt-4">{{ trans('messages.newsletter_information') }}</h2>
+        <h2 class="text-semibold text-primary mt-4">{{ trans('messages.newsletter_information') }}</h2><a id="newslettermsg"></a>
         <div class="row">
             <div class="col-md-12">
                 @include('helpers.form_control', ['type' => 'textarea', 'label' => trans('messages.consultant_message'), 'name' => 'message', 'value' => $contact->message, 'rows'=>5, 'rules' => Acelle\Model\Contact::$rules])

@@ -87,9 +87,20 @@
                         'value' => $user->last_name,
                         'rules' => $user->registerRules()
                     ])
-                @endif
-                
                     
+                @endif
+                    @include('helpers.form_control', [
+                            'type' => 'text',
+                            'name' => 'url',
+                            'value' => $user->url,
+                            'rules' => $user->registerRules()
+                        ])
+                        @include('helpers.form_control', [
+                            'type' => 'text',
+                            'name' => 'consultant_id',
+                            'value' => $user->consultant_id,
+                            'rules' => $user->registerRules()
+                    ])    
                 
                 @include('helpers.form_control', [
                     'type' => 'password',
