@@ -93,13 +93,13 @@ class InvoiceNewSubscription extends Invoice
         $invoiceItem = $this->invoiceItems()->first(); // subscription plan always has 1 invoice item (design)
 
         // if has trial => set price = 0
-        if ($this->getPlan()->hasTrial() && $invoiceItem->amount != 0) {
+        if ($this->getPlan()->hasTrial() && $invoiceItem->amount != 0 && $this->customer->trial_over != 1) {
             $invoiceItem->amount = 0;
             $invoiceItem->save();
         }
 
         // if not trial and price updated
-        elseif (!$this->getPlan()->hasTrial() && $invoiceItem->amount != $this->getPlan()->getPrice()) {
+        elseif (!$this->getPlan()->hasTrial() && $invoiceItem->amount != $this->getPlan()->getPrice() && $this->customer->trial_over != 1) {
             $invoiceItem->amount = $this->getPlan()->getPrice();
             $invoiceItem->save();
         }

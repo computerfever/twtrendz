@@ -61,7 +61,7 @@ class Customer extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'timezone', 'language_id', 'color_scheme', 'text_direction', 'menu_layout', 'theme_mode'
+        'name', 'timezone', 'language_id', 'color_scheme', 'text_direction', 'menu_layout', 'trial_over', 'theme_mode'
     ];
 
     public function subscriptions()
@@ -1277,7 +1277,7 @@ class Customer extends Model
             // allways create init subscription with init invoice (by design)
             $subscription = Subscription::createNewSubscription($this, $plan);
 
-            if ($plan->hasTrial()) {
+            if ($plan->hasTrial() and $this->trial_over != 1) {
                 $invoice = $subscription->createNewSubscriptionInvoiceWithTrial();
             } else {
                 $invoice = $subscription->createNewSubscriptionInvoiceWithoutTrial();

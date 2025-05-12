@@ -299,7 +299,8 @@ class SubscriptionController extends Controller
             \Acelle\Model\Setting::get('not_require_card_for_trial') == 'yes' &&
             $invoice->type == InvoiceNewSubscription::TYPE_NEW_SUBSCRIPTION && // chỉ có newSub invoice mới bỏ qua trial
             in_array($customer->getPreferredPaymentGateway()->getType(), ['stripe', 'braintree', 'paystack']) && // @todo moving this to interface
-            $invoice->getPlan()->hasTrial()
+            $invoice->getPlan()->hasTrial() &&
+			$customer->trial_over != 1
         ) {
             $invoice->checkout($customer->getPreferredPaymentGateway(), function () {
                 return new \Acelle\Library\TransactionResult(\Acelle\Library\TransactionResult::RESULT_DONE);

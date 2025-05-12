@@ -103,13 +103,13 @@
                                                     'plan_uid' => $plan->uid,
                                                 ]) }}"
                                                 class="btn fw-600 btn-primary rounded-3 d-block py-2 shadow-sm">
-                                                    @if ($plan->isFree() || $plan->hasTrial())
+                                                    @if ($plan->isFree() || ($plan->hasTrial() AND Auth::user()->customer->trial_over != 1))
                                                         {{ trans('messages.plan.select') }}
                                                     @else
                                                         {{ trans('messages.plan.buy') }}
                                                     @endif
                                             </a>
-                                            @if ($plan->hasTrial())
+                                            @if ($plan->hasTrial() AND Auth::user()->customer->trial_over != 1)
                                                 <p
                                                     link-method="POST"
                                                     href="{{ action('SubscriptionController@assignPlan', [
