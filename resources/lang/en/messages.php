@@ -999,6 +999,8 @@
   'change_list' => 'Change list',
   'change_password' => 'Change password',
   'change_payment_method' => 'Change payment method',
+  'open_portal' => 'Open Customer Portal',
+
   'change_plan.desc' => 'You’re changing from <strong>:plan</strong> plan to <strong>:newPlan</strong> plan. Next end period date is <strong>:date</strong>',
   'change_sort_direction' => 'Change sort direction',
   'check_and_save_crontab' => 'Check & Save',

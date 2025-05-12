@@ -22,6 +22,13 @@
         </div>
     </div>
 
+    @if(request()->user()->customer->getPreferredPaymentGateway()->getName() == "Stripe")
+    <a href="{{ action('AccountController@openPortal') }}" class="btn btn-primary mt-4" target="_blank">
+        {{ trans('messages.open_portal') }}
+    </a>
+
+    @endif
+
     @if (Auth::user()->can('updateProfile', Auth::user()->customer))
         <a href="{{ action('AccountController@editPaymentMethod', [
             'redirect' => isset($redirect) ? $redirect : action('AccountController@billing'),
@@ -29,6 +36,7 @@
             {{ trans('messages.change_payment_method') }}
         </a>
     @endif
+
 @else
     <p>{{ trans('messages.have_no_payment_method') }}</p>
     

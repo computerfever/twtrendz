@@ -368,6 +368,7 @@ Route::group(['middleware' => ['not_installed', 'auth', 'frontend', '2fa']], fun
     Route::get('account/logs/listing', 'AccountController@logsListing');
     Route::get('account/quota_log_2', 'AccountController@quotaLog2');
     Route::get('account/quota_log', 'AccountController@quotaLog');
+    Route::get('account/portal', 'AccountController@openPortal');
     Route::get('account/billing', 'AccountController@billing');
     Route::match(['get', 'post'], 'account/billing/edit', 'AccountController@editBillingAddress');
 });

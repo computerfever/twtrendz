@@ -314,6 +314,22 @@ class AccountController extends Controller
         return redirect()->action('AccountController@api');
     }
 
+    public function openPortal(Request $request){
+
+        $gateway = Billing::getGateway('stripe');
+
+        $autoBillingData = $request->user()->customer->getAutoBillingData()->getData();
+
+        $stripe = new \Stripe\StripeClient($gateway->getSecretKey());
+
+        $session = $stripe->billingPortal->sessions->create([
+          'customer' => $autoBillingData['customer_id'],
+          'return_url' => action("AccountController@billing"),
+        ]);
+
+        return redirect()->away($session->url);
+    }
+
     /**
      * Billing.
      */
