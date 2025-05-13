@@ -28,6 +28,11 @@ Route::group(['middleware' => ['installed']], function () {
     Route::get('install/finish', 'InstallController@finish');
 });
 
+
+Route::prefix('webhooks')->name('webhooks.')->group(function () {
+    Route::post('/stripe', 'StripeController@handleWebhook');
+});
+
 /*
  * The following routes
  * + customer_files
