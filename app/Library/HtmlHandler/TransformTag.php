@@ -108,6 +108,11 @@ class TransformTag implements StageInterface
             $tags['image'] = @$this->subscriber->mailList->customer->contact->image;
             $tags['profile_photo'] = @$this->subscriber->mailList->customer->user->getProfileImageUrl();
 
+            if(@$this->subscriber->mailList->customer->contact->country->name == "Canada"){
+                $html = str_replace('https://www.tupperware.com/','https://www.tupperware.ca/', $html);
+                $html = str_replace('twcId=US','twcId=CA', $html);
+            }
+
             $updateProfileUrl = $this->subscriber->generateUpdateProfileUrl();
 
             if (is_null($this->msgId)) {
