@@ -192,7 +192,7 @@
 						</a>
 					</li>
 					<li class="button__share button__share--twitter">
-						<a href="javascript:void(window.open('https://twitter.com/share?url=' + encodeURIComponent('{{action('Pub\CampaignController@previewContent', [ 'uid' => $campaign->uid, 'customer_uid' => $campaign->customer->uid ])}}') + '&amp;text=' + encodeURIComponent(document.title) + '&amp;via=fabienb&amp;hashtags=koandesign','_blank'))">
+						<a href="javascript:void(window.open('https://twitter.com/share?url=' + encodeURIComponent('{{action('Pub\CampaignController@previewContent', [ 'uid' => $campaign->uid, 'customer_uid' => $campaign->customer->uid ])}}') + '&amp;text=' + encodeURIComponent(document.title),'_blank'))">
 							<span class="d-flex align-items-center">
 								<span class="me-2">
 									<svg style="height:20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 246.2 200"><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path d="M221,49.8c.1,2.2.1,4.3.1,6.5,0,66.8-50.8,143.7-143.7,143.7h0A142.8,142.8,0,0,1,0,177.3a96.7,96.7,0,0,0,12,.8,100.9,100.9,0,0,0,62.7-21.7,50.4,50.4,0,0,1-47.1-35.1,50.3,50.3,0,0,0,22.8-.8A50.5,50.5,0,0,1,9.9,71v-.7a49.4,49.4,0,0,0,22.9,6.3A50.5,50.5,0,0,1,17.1,9.2,143.6,143.6,0,0,0,121.2,62a50.6,50.6,0,0,1,86.1-46.1A103.4,103.4,0,0,0,239.4,3.7a51.2,51.2,0,0,1-22.2,27.9,101.7,101.7,0,0,0,29-8A104.6,104.6,0,0,1,221,49.8Z" style="fill:#fff"/></g></g></svg>
