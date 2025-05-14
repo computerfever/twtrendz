@@ -1928,14 +1928,22 @@ class CampaignController extends Controller
     public function previewContent(Request $request)
     {
         $campaign = Campaign::findByUid($request->uid);
-        $subscriber = Subscriber::find($request->subscriber_id);
+        // $subscriber = Subscriber::find($request->subscriber_id);
+        $subscriber = $campaign->subscribers()->first();
 
         // authorize
         if ($campaign->admin == 0 AND \Gate::denies('preview', $campaign)) {
             return $this->notAuthorized();
         }
 
-        echo $campaign->getHtmlContent($subscriber);
+        // echo $campaign->getHtmlContent($subscriber);
+
+        return view('campaigns.web_view', [
+            'campaign' => $campaign,
+            'subscriber' => $subscriber,
+            'message_id' => null,
+        ]);
+        
     }
 
     /**

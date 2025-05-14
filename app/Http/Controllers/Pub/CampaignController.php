@@ -715,9 +715,15 @@ class CampaignController extends Controller
     {
         $this->setUserDbConnection($request);
         $campaign = Campaign::findByUid($request->uid);
-        $subscriber = Subscriber::find($request->subscriber_id);
+        // $subscriber = Subscriber::find($request->subscriber_id);
+        $subscriber = $campaign->subscribers()->first();
 
-        echo $campaign->getHtmlContent($subscriber);
+        // echo $campaign->getHtmlContent($subscriber);
+        return view('campaigns.web_view', [
+            'campaign' => $campaign,
+            'subscriber' => $subscriber,
+            'message_id' => null,
+        ]);
     }
 
     /**
