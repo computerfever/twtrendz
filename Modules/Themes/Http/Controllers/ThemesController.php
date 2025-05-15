@@ -74,6 +74,11 @@ class ThemesController extends Controller{
 			}
 		}
 
+		if(@$customer->contact->country->name == "Canada"){
+            $html = str_replace('https://www.tupperware.com/','https://www.tupperware.ca/', $html);
+            $html = str_replace('twcId=US','twcId=CA', $html);
+        }
+
 		foreach ($tags as $tag => $value) {
 			$html = str_replace('{'.$tag.'}', $value ?? '', $html);
 		}
