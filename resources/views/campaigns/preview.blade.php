@@ -181,6 +181,9 @@
 
 			<div class="ms-auto">
 				<ul class="social-buttons">
+
+					<li class="button__share button__share--stumbleupon"><a href="{{action('Pub\CampaignController@previewContent', [ 'uid' => $campaign->uid, 'customer_uid' => $campaign->customer->uid ])}}" target="_blank">Public Url</a></li>
+
 					<li class="button__share button__share--facebook">
 						<a href="javascript:void(window.open('https://www.facebook.com/sharer.php?u=' + encodeURIComponent('{{action('Pub\CampaignController@previewContent', [ 'uid' => $campaign->uid, 'customer_uid' => $campaign->customer->uid ])}}') + '?t=' + encodeURIComponent(document.title),'_blank'))">
 							<span class="d-flex align-items-center">

@@ -140,7 +140,7 @@
                         </span>
                     </a>
                 </li>
-                {{-- <!-- can add &mini=true -->
+                <!-- can add &mini=true -->
                 <li class="button__share button__share--reddit"><a href="javascript:void(window.open('http://reddit.com/submit?url=' + encodeURIComponent(document.location) + '&amp;title=' + encodeURIComponent(document.title),'_blank'))">Reddit</a></li>
                 <li class="button__share button__share--hackernews"><a href="javascript:void(window.open('http://news.ycombinator.com/submitlink?u=' + encodeURIComponent(document.location) + '&amp;t=' + encodeURIComponent(document.title),'_blank'))">Hacker News</a></li>
                 <li class="button__share button__share--buffer"><a href="javascript:void(window.open('http://bufferapp.com/add?text=' + encodeURIComponent(document.title) + '&amp;url=' + encodeURIComponent(document.location),'_blank'))">Buffer</a></li>
@@ -155,7 +155,7 @@
                 <!-- can add &s=[post-desc]&i=[post-img] -->
                 <li class="button__share button__share--pocket"><a href="javascript:void(window.open('https://getpocket.com/save?url=' + encodeURIComponent(document.location) + '&amp;title=' + encodeURIComponent(document.title),'_blank'))">Pocket</a></li>
                 <li class="button__share button__share--pinterest"><a href="javascript:void(window.open('https://pinterest.com/pin/create/bookmarklet/?url=' + encodeURIComponent(document.location) + '&amp;description=' + encodeURIComponent(document.title),'_blank'))">Pinterest</a></li>
-                <!-- can add &media=[post-img] &is_video=[is_video] If the content is a video or not --> --}}
+                <!-- can add &media=[post-img] &is_video=[is_video] If the content is a video or not -->
             </ul>
         </div>
     </div>
