@@ -1357,6 +1357,7 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
 
         // Other attributes to clone
         $attributes = [
+            'admin',
             'type',
             'subject',
             'preheader',
