@@ -244,7 +244,7 @@
 
 
                         <a class="btn btn-primary me-1" href="{{action('Pub\CampaignController@previewContent', [ 'uid' => $campaign->uid, 'customer_uid' => $campaign->customer->uid ])}}" target="_blank">
-                           <span class="material-symbols-rounded">visibility</span> Public Url
+                           <span class="material-symbols-rounded">visibility</span> Preview Public Url
                         </a>
 
                         <button
