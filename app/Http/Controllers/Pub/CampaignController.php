@@ -714,9 +714,19 @@ class CampaignController extends Controller
     public function previewContent(Request $request)
     {
         $this->setUserDbConnection($request);
+
+        $customer = \Acelle\Model\Customer::findByUid($request->customer_uid);
+
         $campaign = Campaign::findByUid($request->uid);
+
+        $mailList = \Acelle\Model\MailList::select('mail_lists.*')->leftJoin('subscriptions', 'subscriptions.customer_id', '=', 'mail_lists.customer_id')->where('subscriptions.status','=','active')->where('mail_lists.name', '=', 'Newsletter')->where('mail_lists.customer_id', '=', $customer->id)->first();
+
         // $subscriber = Subscriber::find($request->subscriber_id);
-        $subscriber = $campaign->subscribers()->first();
+        if($mailList == null){
+            $subscriber = $campaign->subscribers()->first();
+        }else{
+            $subscriber = $mailList->subscribers()->first();
+        }
 
         // echo $campaign->getHtmlContent($subscriber);
         return view('campaigns.web_view', [
