@@ -132,8 +132,11 @@ class TransformTag implements StageInterface
             $tags['UPDATE_PROFILE_URL'] = $updateProfileUrl;
             $tags['UNSUBSCRIBE_URL'] = $unsubscribeUrl;
             $tags['WEB_VIEW_URL'] = $webViewUrl;
+
             if(isset($_SERVER['HTTP_HOST'])){
                 $tags['PREVIEW_URL'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+            }else{
+                $tags['PREVIEW_URL'] = $webViewUrl;
             }
 
             $tags['SUBSCRIBER_UID'] = $this->subscriber->uid;
