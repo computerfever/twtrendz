@@ -12,6 +12,13 @@
             <th>{{ trans('messages.created_at') }}</th>
         </tr>
         @foreach ($items as $key => $item)
+
+            <?php
+
+                $item->raw = json_decode($item->raw);
+
+            ?>
+
             <tr>
                 <td>
                     <span class="no-margin kq_search">{{ $item->trackingLog->subscriber->email }}</span>

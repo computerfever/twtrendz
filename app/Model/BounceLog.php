@@ -34,9 +34,9 @@ class BounceLog extends Model
     public const SOFT = 'soft';
     public const UNKNOWN = 'unknown';
 
-    protected $casts = [
-        'raw' => 'object',
-    ];
+    // protected $casts = [
+    //     'raw' => 'object',
+    // ];
 
     /**
      * Associations.
@@ -132,7 +132,7 @@ class BounceLog extends Model
 
         // SendGrid only notifies in case of HARD bounce
         $bounceLog->bounce_type = self::HARD;
-        $bounceLog->raw = json_decode($raw, true); // notice that {$raw} might contain more than one events
+        $bounceLog->raw = $raw; // notice that {$raw} might contain more than one events
         $bounceLog->save();
 
         // add subscriber's email to blacklist
