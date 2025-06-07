@@ -235,6 +235,7 @@ class Template extends Model
             ['name' => 'email', 'required' => false],
             ['name' => 'URL', 'required' => false],
             ['name' => 'profile_photo', 'required' => false],
+            ['name' => 'signup_form_url', 'required' => false],
         ]);
 
         return $tags;
