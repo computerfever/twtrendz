@@ -41,6 +41,7 @@ class ThemesController extends Controller{
 		}
 
 		$html = $page->html;
+		$thank_you_page_html = $page->thank_you_page_html;
 		
 		if($request->landingPageUser != null){
 			$customer = $request->landingPageUser->customer;
@@ -77,10 +78,15 @@ class ThemesController extends Controller{
 		if(@$customer->contact->country->name == "Canada"){
             $html = str_replace('https://www.tupperware.com/','https://www.tupperware.ca/', $html);
             $html = str_replace('twcId=US','twcId=CA', $html);
+
+            $thank_you_page_html = str_replace('https://www.tupperware.com/','https://www.tupperware.ca/', $thank_you_page_html);
+            $thank_you_page_html = str_replace('twcId=US','twcId=CA', $thank_you_page_html);
         }
 
 		foreach ($tags as $tag => $value) {
 			$html = str_replace('{'.$tag.'}', $value ?? '', $html);
+			
+			$thank_you_page_html = str_replace('{'.$tag.'}', $value ?? '', $thank_you_page_html);
 		}
 
 		return response()->json([
@@ -93,7 +99,7 @@ class ThemesController extends Controller{
 			'thank_custom_header' => $page->thank_custom_header,
 			'thank_custom_footer' => $page->thank_custom_footer,
 			'thank_you_page_css'  => $page->thank_you_page_css,
-			'thank_you_page_html' => $page->thank_you_page_html,
+			'thank_you_page_html' => $thank_you_page_html,
 			'main_page_script'    => $page->main_page_script,
 		]);
 	}
