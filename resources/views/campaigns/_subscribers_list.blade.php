@@ -7,6 +7,14 @@
             <?php 
 
             $bounced_message = json_decode($subscriber->bounced_message);
+            // $bounced_message = "<pre>".print_r(json_decode($subscriber->bounced_message), TRUE)."</pre>";
+            $skipped_message = json_decode($subscriber->skipped_message);
+
+            // echo $skipped_message;
+
+            // echo htmlentities($skipped_message);
+            // print_r(@$subscriber);
+            // exit();
 
             ?>
             <tr class="position-relative">
@@ -43,13 +51,19 @@
                             <span class="label label-flat bg-{{ $subscriber->verification_status }}">{{ trans('messages.email_verification_result_' . $subscriber->verification_status) }}</span>
                         </a>
                         <br />
-                        <span data-popup="tooltip" title2="{{ 
-                            $subscriber->bounced_message ?:
-                            $subscriber->feedback_message ?:
-                            $subscriber->failed_message ?:
-                            $subscriber->skipped_message ?:
-                            $subscriber->new_message
-                        }}" class="label label-flat bg-{{ $subscriber->delivery_status }} kq_search">
+                        <span data-popup="tooltip" title=' <pre>
+                            @if ($subscriber->bounced_message)
+                                {{print_r($bounced_message,true)}}
+                            @elseif ($subscriber->feedback_message)
+                                {{ $subscriber->feedback_message; }}
+                            @elseif($subscriber->failed_message)
+                                {{ $subscriber->failed_message }}
+                            @elseif($subscriber->skipped_message)
+                                {{ print_r($skipped_message,true) }}
+                            @elseif($subscriber->new_message)
+                                {{ $subscriber->new_message }}
+                            @endif
+                        </pre> ' class="label label-flat bg-{{ $subscriber->delivery_status }} kq_search">
                         {{-- {{$subscriber->delivery_status}} --}}
                         {{ trans('messages.tracking_log_status_' . $subscriber->delivery_status) }}
                         </span>

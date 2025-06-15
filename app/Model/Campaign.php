@@ -2257,7 +2257,7 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
          *     + subscribers 1:1 email_verification
          *     + [campaign, subscriber] 1:1 tracking_logs
          * */
-        $query = $this->subscribers()->leftJoinSub(
+        $query = $this->subscribers()->leftJoin('blacklists', 'subscribers.email', 'blacklists.email')->leftJoinSub(
             // Why joinSub? Notice that this->subscribers() does not have campaign_id constraint!
             // while this->trackingLogs() does have
             $this->trackingLogs(),

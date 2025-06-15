@@ -1706,7 +1706,8 @@ class CampaignController extends Controller
                                 ->addSelect('subscribers.*')
                                 ->addSelect('bounce_logs.raw AS bounced_message')
                                 ->addSelect('feedback_logs.feedback_type AS feedback_message')
-                                ->addSelect('tracking_logs.error AS failed_message');
+                                ->addSelect('tracking_logs.error AS failed_message')
+                                ->addSelect('blacklists.reason AS skipped_message');
 
         // Check open conditions
         if ($request->open) {
