@@ -51,8 +51,8 @@
                             <span class="label label-flat bg-{{ $subscriber->verification_status }}">{{ trans('messages.email_verification_result_' . $subscriber->verification_status) }}</span>
                         </a>
                         <br />
-                        <span data-popup="tooltip" title=' <pre>
-                            @if ($subscriber->bounced_message)
+                        <span data-popup="tooltip" title='
+                            <pre> @if ($subscriber->bounced_message)
                                 {{print_r($bounced_message,true)}}
                             @elseif ($subscriber->feedback_message)
                                 {{ $subscriber->feedback_message; }}
@@ -62,8 +62,8 @@
                                 {{ print_r($skipped_message,true) }}
                             @elseif($subscriber->new_message)
                                 {{ $subscriber->new_message }}
-                            @endif
-                        </pre> ' class="label label-flat bg-{{ $subscriber->delivery_status }} kq_search">
+                            @endif </pre>
+                        ' class="label label-flat bg-{{ $subscriber->delivery_status }} kq_search">
                         {{-- {{$subscriber->delivery_status}} --}}
                         {{ trans('messages.tracking_log_status_' . $subscriber->delivery_status) }}
                         </span>
