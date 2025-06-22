@@ -51,7 +51,9 @@ class LocalCustomer extends Customer
 
     public function sentCampaigns()
     {
-        return $this->hasMany('Acelle\Model\Campaign', 'customer_id')->where('status', '=', 'done')->orderBy('created_at', 'desc');
+        return $this->hasMany('Acelle\Model\Campaign', 'customer_id')->where('status', '=', 'done')->orWhere(function($query) {
+            $query->where('admin', '1')->where('status', 'done');
+        })->orderBy('created_at', 'desc');
     }
 
     public function subscribers()

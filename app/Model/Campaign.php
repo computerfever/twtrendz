@@ -408,7 +408,9 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
     {
         $query = self::getAll();
         if ($customer) {
-            $query = $query->where('customer_id', '=', $customer->id);
+            $query = $query->where('customer_id', '=', $customer->id)->orWhere(function($query) {
+                $query->where('admin', '1')->where('status', 'done');
+            });
         }
         if (isset($status)) {
             $query = $query->where('status', '=', $status);

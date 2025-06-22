@@ -3,11 +3,11 @@
 		<h5 class="mt-10 text-semibold">
             @if ($campaign->isDone())
                 {!! trans('messages.campaign.sent_to', [
-                    'count' => '<span class="text-bold badge badge-info bg-info-800 badge-big">' . $campaign->readCache("SubscriberCount", 0) . '</span>'
+                    'count' => '<span class="text-bold badge badge-info bg-info-800 badge-big">' . $campaign->subscribersCount() . '</span>'
                 ]) !!}
             @else
                 {!! trans('messages.send_to', [
-                    'count' => '<span class="text-bold badge badge-info bg-info-800 badge-big">' . $campaign->readCache("SubscriberCount", 0) . '</span>'
+                    'count' => '<span class="text-bold badge badge-info bg-info-800 badge-big">' . $campaign->subscribersCount() . '</span>'
                 ]) !!}
             @endif
         </h5>
