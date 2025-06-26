@@ -246,7 +246,11 @@ trait HasTemplate
             $message->setFrom(array($this->from_email => $this->from_name));
             if($this->admin == 1 AND !empty($subscriber->mailList)){
                 $subscriberUser = $subscriber->mailList->customer->user;
-                $message->setReplyTo($subscriberUser->email);
+                if(empty($subscriberUser->fwd_email)){
+                    $message->setReplyTo($subscriberUser->email);
+                }else{
+                    $message->setReplyTo($subscriberUser->fwd_email);
+                }
             }else{
                 $message->setReplyTo($this->reply_to);
             }
