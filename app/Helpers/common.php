@@ -6,8 +6,38 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\File;
 use Nwidart\Modules\Facades\Module;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Modules\Core\Library\License;
 use Modules\LandingPage\Entities\LandingPage;
+
+
+if (!function_exists('insertForwaderEmail')) {
+
+	function insertForwaderEmail($email,$fwdEmail){
+
+		$fwdText = explode("@", $fwdEmail)[0];
+		
+        $api = Http::withHeaders([
+            'Authorization' => 'cpanel '.env('CPANEL_USERNAME').':'.env('CPANEL_TOKEN'),
+        ])->get('https://twtrendz.com:2083/execute/Email/list_forwarders?regex='.$fwdEmail);
+        $response = json_decode($api->body());
+
+        if(!empty($response->data)){
+        	return $response->data[0]->dest;
+        }else{
+
+	        $api = Http::withHeaders([
+	            'Authorization' => 'cpanel '.env('CPANEL_USERNAME').':'.env('CPANEL_TOKEN'),
+	        ])->get("https://twtrendz.com:2083/execute/Email/add_forwarder?domain=twtrendz.com&email=$fwdText&fwdopt=fwd&fwdemail=$email");
+	        $response = json_decode($api->body());
+
+	        return $response->data[0]->email;
+
+        }
+
+	}
+
+}
 
 if (!function_exists('checkAwsS3')) {
 	function checkIsAwsS3(){

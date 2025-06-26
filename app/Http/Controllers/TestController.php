@@ -5,6 +5,8 @@ namespace Acelle\Http\Controllers;
 use Illuminate\Http\Request;
 use Acelle\Model\Subscription;
 
+use Illuminate\Support\Facades\Http;
+
 use Modules\LandingPage\Entities\LandingPage;
 
 class TestController extends Controller
@@ -15,6 +17,32 @@ class TestController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request){
+
+        $users = \Acelle\Model\User::get();
+
+        foreach ($users as $user) {
+
+            if(!$user->can("admin_access", $user)){
+                
+                $email = $user->email;
+
+                $fwdEmail = strtolower(explode("@", $email)[0]."@twtrendz.com");
+
+                $insertForwaderEmail = insertForwaderEmail($email,$fwdEmail);
+
+                echo $email." --- ".$fwdEmail."<br>";
+
+                echo $insertForwaderEmail;
+
+                echo "<br>";
+
+                $user->fwd_email = $insertForwaderEmail;
+
+                $user->save();
+
+            }
+
+        }
 
         // $logs = \Acelle\Model\BounceLog::where('raw', 'like', '"{%')->get();
 
@@ -63,4 +91,5 @@ class TestController extends Controller
         // }
 
     }   
+    
 }
