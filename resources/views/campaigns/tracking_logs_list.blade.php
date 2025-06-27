@@ -6,7 +6,9 @@
 			<th>{{ trans('messages.recipient') }}</th>
 			<th>{{ trans('messages.status') }}</th>
 			<th>{{ trans('messages.campaign') }}</th>
-			{{-- <th>{{ trans('messages.sending_server') }}</th> --}}
+			@can("admin_access", Auth::user())
+			<th>{{ trans('messages.sending_server') }}</th>
+			@endif
 			<th>{{ trans('messages.created_at') }}</th>
 		</tr>
 		@foreach ($items as $key => $item)
@@ -25,10 +27,12 @@
 					<span class="no-margin kq_search">{{ is_null($item->campaign) ? 'N/A' : $item->campaign->name }}</span>
 					<span class="text-muted second-line-mobile">{{ trans('messages.campaign') }}</span>
 				</td>
-				{{-- <td>
+				@can("admin_access", Auth::user())
+				<td>
 					<span class="no-margin kq_search">{{ $item->getSendingServer()->name }}</span>
 					<span class="text-muted second-line-mobile">{{ trans('messages.sending_server') }}</span>
-				</td> --}}
+				</td>
+				@endif
 				<td>
 					<span class="no-margin kq_search">{{ Auth::user()->customer->formatDateTime($item->created_at, 'datetime_full') }}</span>
 					<span class="text-muted second-line-mobile">{{ trans('messages.created_at') }}</span>
