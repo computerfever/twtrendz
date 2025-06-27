@@ -43,6 +43,7 @@
                                 <span class="label label-flat bg-danger">
                                     {{@$bounced_message->category}}
                                     {{@$bounced_message->bounce_classification}}
+                                    {{@$bounced_message->bounce->bounceSubType}}
                                 </span>
                             @else
                                 <span class="label label-flat bg-{{ $subscriber->status }}">{{ trans('messages.' . $subscriber->status) }}</span>
