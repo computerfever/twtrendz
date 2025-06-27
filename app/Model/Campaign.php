@@ -2377,6 +2377,16 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
         }
     }
 
+    public function getAmazonServerPool(){
+
+        $pool = new RouletteWheel();
+        $server = SendingServer::where('type','amazon-api')->first()->mapType();
+        $pool->add($server, 100);
+        
+        return $pool;
+
+    }
+
     public function getServersPool()
     {
         if (is_null($this->serversPool)) {
@@ -2411,6 +2421,7 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
         // Query subscribers
         $subscribers = $this->subscribersToSend()->whereIn('subscribers.id', $listOfIds)->get();
         $serverPool = $this->getServersPool();
+        $amazonServerPool = $this->getAmazonServerPool();
 
         if (sizeof($subscribers) == 0) {
             $this->logger()->info("Page {$page}, no contacts in this page");
@@ -2419,14 +2430,21 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
         }
 
         foreach ($subscribers as $subscriber) {
+
+            $countSentLogs = TrackingLog::where('subscriber_id',$subscriber->id)->where('status', 'sent')->where('sending_server_id','!=',15)->count();
+
             // Dispatch delivery job and return it to the LoadCampaign to monitor
             if (config('app.saas')) {
                 $subscription = $this->customer->getCurrentActiveGeneralSubscription();
             } else {
                 $subscription = null;
             }
+            if($countSentLogs>= 4){
+                $job = new SendMessage($this, $subscriber, $amazonServerPool, $subscription);
+            }else{
+                $job = new SendMessage($this, $subscriber, $serverPool, $subscription);
+            }
 
-            $job = new SendMessage($this, $subscriber, $serverPool, $subscription);
             $stopOnError = $this->stopOnError();
             // $stopOnError = Setting::isYes('campaign.stop_on_error'); // true or false
             $job->setStopOnError($stopOnError);
