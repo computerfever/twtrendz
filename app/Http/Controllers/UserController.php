@@ -144,12 +144,6 @@ class UserController extends Controller
                 }
             }
 
-            $fwdEmail = strtolower(explode("@", $request->email)[0]."@twtrendz.com");
-            $forwaderEmail = insertForwaderEmail($request->email,$fwdEmail);
-
-            $user->fwd_email = $forwaderEmail;
-            $user->save();
-
             // validation
             list($validator, $customer, $user) = \Acelle\Model\Customer::createCustomerWithDefaultUser(
                 $admin = null,
@@ -175,6 +169,12 @@ class UserController extends Controller
                 ]);
             }
 
+
+            $fwdEmail = strtolower(explode("@", $request->email)[0]."@twtrendz.com");
+            $forwaderEmail = insertForwaderEmail($request->email,$fwdEmail);
+
+            $user->fwd_email = $forwaderEmail;
+            $user->save();
 
             // Customer Contact
             $customerContact = \Acelle\Model\Contact::create(['first_name' => $request->first_name,'last_name' => $request->last_name,'company' => $request->name, 'email' => $request->email]);
