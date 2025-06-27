@@ -48,6 +48,7 @@
                             </pre> --}}
                             {{@$item->raw->category}}
                             {{@$item->raw->bounce_classification}}
+                            {{@$item->raw->bounce->bounceSubType}}
                         @endif
                     </span>
                     <span class="text-muted second-line-mobile">{{ trans('messages.raw') }}</span>
