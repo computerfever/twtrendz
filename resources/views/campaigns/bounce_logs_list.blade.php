@@ -21,7 +21,7 @@
 
             <tr>
                 <td>
-                    <span class="no-margin kq_search">{{ @$item->trackingLog->subscriber->email }}</span>
+                    <span class="no-margin kq_search">{{$item->trackingLog->id}} {{ @$item->trackingLog->subscriber->email }}</span>
                     <span class="text-muted second-line-mobile">{{ trans('messages.recipient') }}</span>
                 </td>
                 <td>
