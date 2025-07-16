@@ -2433,13 +2433,16 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
 
             $countSentLogs = TrackingLog::where('subscriber_id',$subscriber->id)->where('status', 'sent')->where('sending_server_id','!=',15)->count();
 
+            // $countAmazonSentLogs = TrackingLog::where('subscriber_id',$subscriber->id)->where('status','sent')->where('sending_server_id',15)->count();
+            $countAmazonBounceLogs = BounceLog::select('bounce_logs.*')->leftJoin('tracking_logs', 'tracking_logs.id', '=', 'bounce_logs.tracking_log_id')->where('tracking_logs.subscriber_id', '=', $subscriber->id)->where('tracking_logs.sending_server_id',15)->count();
+
             // Dispatch delivery job and return it to the LoadCampaign to monitor
             if (config('app.saas')) {
                 $subscription = $this->customer->getCurrentActiveGeneralSubscription();
             } else {
                 $subscription = null;
             }
-            if($countSentLogs>= 4){
+            if($countSentLogs>= 4 AND $countAmazonBounceLogs == 0){
                 $job = new SendMessage($this, $subscriber, $amazonServerPool, $subscription);
             }else{
                 $job = new SendMessage($this, $subscriber, $serverPool, $subscription);
