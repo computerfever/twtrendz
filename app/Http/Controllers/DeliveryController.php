@@ -240,14 +240,17 @@ class DeliveryController extends Controller
             $bounceLog->bounce_type = $bounce['bounceType']; // !== 'Permanent' ? BounceLog::SOFT : BounceLog::HARD;
             $bounceLog->raw = $message['Message'];
             $trackingLog = TrackingLog::where('runtime_message_id', $bounceLog->runtime_message_id)->first();
+            $countBounceLog = BounceLog::where('runtime_message_id', $bounceLog->runtime_message_id)->count();
             if (!is_null($trackingLog)) {
-                $bounceLog->message_id = $trackingLog->message_id;
-                $bounceLog->save();
-                MailLog::info('Bounce recorded for message '.$bounceLog->runtime_message_id);
+                if($countBounceLog == 0){
+                    $bounceLog->message_id = $trackingLog->message_id;
+                    $bounceLog->save();
+                    MailLog::info('Bounce recorded for message '.$bounceLog->runtime_message_id);
 
-                if ($bounce['bounceType'] === 'Permanent') {
-                    MailLog::info('Adding email to blacklist');
-                    $bounceLog->findSubscriberByRuntimeMessageId()->sendToBlacklist($bounceLog->raw);
+                    if ($bounce['bounceType'] === 'Permanent') {
+                        MailLog::info('Adding email to blacklist');
+                        $bounceLog->findSubscriberByRuntimeMessageId()->sendToBlacklist($bounceLog->raw);
+                    }
                 }
             } else {
                 MailLog::info('No tracking log found');
