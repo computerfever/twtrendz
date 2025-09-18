@@ -12,6 +12,8 @@ Route::group(['middleware' => ['not_installed', 'auth', 'frontend', 'subscriptio
 
 	Route::post('getFonts', 'LandingPageController@getFonts'); //working
 
+	Route::get('/customerLandingpages', 'LandingPageController@index2')->name('landingpages.index2');//working
+
 	Route::prefix('landingpages')->group(function() {
 		Route::get('/', 'LandingPageController@index')->name('landingpages.index');//working
 
@@ -19,6 +21,8 @@ Route::group(['middleware' => ['not_installed', 'auth', 'frontend', 'subscriptio
 		Route::get('setting/{item}', 'LandingPageController@setting')->name('landingpages.setting');//working
 
 		Route::get('publish/{item}', 'LandingPageController@publish')->name('landingpages.publish');//working
+		
+		Route::get('make-it-publish/{item}', 'LandingPageController@makeItPublish')->name('landingpages.makeItPublish');//working
 
 		Route::post('setting-update/{item}', 'LandingPageController@settingUpdate')->name('landingpages.settings.update'); //working
 

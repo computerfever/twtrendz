@@ -45,6 +45,8 @@ class LandingPageController extends Controller{
             $query->where('admin', '1')->where('is_publish', 1);
         });
 
+		$data = LandingPage::where(['user_id'=> $request->user()->customer->id])->where('admin','!=',1);
+
 		if ($request->filled('search')) {
 			$data->where('name', 'like', '%' . $request->search . '%');
 		}
@@ -52,18 +54,41 @@ class LandingPageController extends Controller{
 		$data->orderBy('updated_at', 'DESC');
 		$data = $data->paginate(12);
 
-		$categories = Category::get();
-
 		// $customerLandingPageUrl = explode("@", $request->user()->email)[0].".".getAppDomain();
 		$customerLandingPageUrl = $request->user()->customerLandingPageUrl();
 
 		$data2 = [
 			'data' => $data,
-			'categories' => $categories,
 			'customerLandingPageUrl' => $customerLandingPageUrl,
 		];
 
 		return view('landingpage::landingpages.index', $data2);
+
+	}
+
+	public function index2(Request $request){
+
+		if(!$request->user()->hasPermission('landing_pages.full_access')){
+		    abort(404);
+		}
+
+		$data = LandingPage::where('admin', '1');
+
+		if ($request->filled('search')) {
+			$data->where('name', 'like', '%' . $request->search . '%');
+		}
+
+		$data->orderBy('updated_at', 'DESC');
+		$data = $data->paginate(12);
+
+		$customerLandingPageUrl = $request->user()->customerLandingPageUrl();
+
+		$data2 = [
+			'data' => $data,
+			'customerLandingPageUrl' => $customerLandingPageUrl,
+		];
+
+		return view('landingpage::landingpages.index2', $data2);
 	}
 	
 	public function clone($id,Request $request){
@@ -77,6 +102,17 @@ class LandingPageController extends Controller{
 		
 		return redirect()->route('landingpages.index')
 			->with('success', __('You copy the landing page :name successfully',['name'=>$page->name]));
+	}
+
+	public function makeItPublish($code,Request $request){
+
+		$page = LandingPage::where('code',$code)->first();
+		
+		$request->user()->landing_page = $page->id;
+		$request->user()->save();
+
+		return redirect()->route('landingpages.index2')->with('success','landing page published successfully.');
+
 	}
 
 	public function getFonts(Request $request){

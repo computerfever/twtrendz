@@ -45,17 +45,26 @@
                          </svg>
                         </span> <span>Landing Pages </span>
                     </a>
-                    <ul class="dropdown-menu {{ in_array($menu, ['landingpages','createLandingPage']) ? 'show' : '' }}" aria-labelledby="audience-menu">
+                    <ul class="dropdown-menu {{ in_array($menu, ['customerLandingpages','landingpages','createLandingPage']) ? 'show' : '' }}" aria-labelledby="audience-menu">
+
+                        <li class="nav-item {{ in_array($menu, ['customerLandingpages']) ? 'active' : '' }}">
+                            <a class="dropdown-item d-flex align-items-center" href="{{url('customerLandingpages')}}">
+                                <span class="navbar-icon"><i class="fa-solid fa-border-all"></i></span> <span>Customer Landing Page Designs</span>
+                            </a>
+                        </li>
+
                         <li class="nav-item {{ in_array($menu, ['landingpages']) ? 'active' : '' }}">
                             <a class="dropdown-item d-flex align-items-center" href="{{url('landingpages')}}">
                                 <span class="navbar-icon"><i class="fa-solid fa-border-all"></i></span> <span>My Landing Pages</span>
                             </a>
                         </li>
+
                         <li class="nav-item {{ in_array($menu, ['createLandingPage']) ? 'active' : '' }}">
                             <a class="dropdown-item d-flex align-items-center" href="{{url('alltemplates')}}">
                                 <span class="navbar-icon"><i class="fas fa-plus"></i></span> <span>Create Landing Page</span>
                             </a>
                         </li>
+
                     </ul>
                 </li>
                 @endif

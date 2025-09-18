@@ -2443,7 +2443,11 @@ class Campaign extends BaseCampaign implements HasTemplateInterface, CampaignInt
                 $subscription = null;
             }
             if($countSentLogs>= 4 AND $countAmazonBounceLogs == 0){
-                $job = new SendMessage($this, $subscriber, $amazonServerPool, $subscription);
+                if($this->admin == 1){
+					$job = new SendMessage($this, $subscriber, $amazonServerPool, $subscription);
+				}else{
+					$job = new SendMessage($this, $subscriber, $serverPool, $subscription);
+				}
             }else{
                 $job = new SendMessage($this, $subscriber, $serverPool, $subscription);
             }

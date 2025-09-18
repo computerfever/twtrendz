@@ -11,6 +11,7 @@ use Acelle\Library\StringHelper;
 use Acelle\Jobs\ExportCampaignLog;
 use Acelle\Model\Template;
 use Acelle\Model\TrackingLog;
+use Acelle\Model\BounceLog;
 use Acelle\Model\Setting;
 use Acelle\Model\Subscriber;
 use Acelle\Model\Campaign;
@@ -778,6 +779,15 @@ class CampaignController extends Controller
     public function overview(Request $request)
     {
         $campaign = Campaign::findByUid($request->uid);
+
+        // echo "<pre>";
+        //     print_r($campaign->getAmazonServerPool());
+        // echo "</pre>";
+
+        // $countLogs = TrackingLog::where('subscriber_id',18852)->where('status','sent')->where('sending_server_id',15)->count();
+        // $countLogs = BounceLog::select('bounce_logs.*')->leftJoin('tracking_logs', 'bounce_logs.message_id', '=', 'tracking_logs.message_id')->where('tracking_logs.subscriber_id', '=', 18852)->where('tracking_logs.sending_server_id',15)->count();
+        // echo $countLogs;
+        // exit();
 
         // authorize
         if ($campaign->admin == 0 AND \Gate::denies('read', $campaign)) {

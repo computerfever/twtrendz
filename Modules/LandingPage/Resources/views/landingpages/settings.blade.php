@@ -53,6 +53,8 @@
 							<label class="form-label">@lang('Name')</label>
 							<input type="text" name="name" value="{{$item->name}}" class="form-control">
 						</div>
+						
+						@if($item->admin == 0)
 						<div class="form-group mb-4 mt-4">
 							<label class="custom-switch pl-0">
 								<input type="checkbox" name="is_publish" value="1" class="custom-switch-input" {{ $item->is_publish ? 'checked' : '' }}>
@@ -60,6 +62,8 @@
 								<span class="custom-switch-description">@lang('Publish')</span>
 							</label>
 						</div>
+						@endif
+
 						<div class="form-group">
 							<label class="form-label">@lang('Favicon')</label>
 							<input name="favicon" type="file" accept="image/*"><br>
